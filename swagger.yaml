@@ -207,7 +207,7 @@ paths:
       operationId: get-V4-Metallic-Azure-Regions
       description: Get the list of regions (Azure)
     parameters: []
-  /V4/AzureDB/Cosmos/AccessNodes:
+  /V4/AzureDB/Cosmos/BackupGateway:
     get:
       summary: Get backup gateways azure Cosmos DB
       tags:
@@ -234,7 +234,7 @@ paths:
           description: Region Id
       description: Get backup gateways azure Cosmos DB
     parameters: []
-  /V4/AzureDB/Maria/AccessNodes:
+  /V4/AzureDB/Maria/BackupGateway:
     get:
       summary: Get backup gateways for azure MariaDB
       tags:
@@ -270,7 +270,7 @@ paths:
           name: regionId
           description: Region
     parameters: []
-  /V4/AzureDB/MySQL/AccessNodes:
+  /V4/AzureDB/MySQL/BackupGateway:
     get:
       summary: Get Backup Gateways for Azure MySQL DB
       tags:
@@ -296,7 +296,7 @@ paths:
           name: regionId
           description: Region Id
     parameters: []
-  /V4/AzureDB/PostgreSQL/AccessNodes:
+  /V4/AzureDB/PostgreSQL/BackupGateway:
     get:
       summary: Get backup gateways for Azure PostgreSQL DB
       tags:
@@ -332,7 +332,7 @@ paths:
           name: regionId
           description: Region Id
     parameters: []
-  /V4/AzureDB/MSSQL/AccessNodes:
+  /V4/AzureDB/MSSQL/BackupGateway:
     get:
       summary: Get backup gateways azure msssql
       tags:
@@ -1672,7 +1672,7 @@ paths:
                   subscriptionId: 2c21f3cf-d49e-43c1-a19b-16b9886f4b25
                   region:
                     id: 9
-                  accessNodes:
+                  backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
         description: ''
@@ -1802,7 +1802,7 @@ paths:
                     password: xxxx
                   endPoint: mariadb103.mariadb.database.azure.com
                   port: 3306
-                  accessNodes:
+                  backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   plan:
@@ -1928,7 +1928,7 @@ paths:
                     password: xxx
                   endPoint: mysqltestserver.mysql.database.azure.com
                   port: 3306
-                  accessNodes:
+                  backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   plan:
@@ -2060,7 +2060,7 @@ paths:
                     password: xxx
                   endPoint: pg11servereastus.postgres.database.azure.com
                   port: 5432
-                  accessNodes:
+                  backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   plan:
@@ -2195,7 +2195,7 @@ paths:
                     name: atest_msslq
                   plan:
                     id: 1638
-                  accessNodes:
+                  backupGateways:
                     - id: 1935
                       name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
         description: ''
@@ -2298,7 +2298,7 @@ paths:
                     id: 9
                   plan:
                     id: 1638
-                  accessNodes:
+                  backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
         description: ''
@@ -2431,19 +2431,19 @@ components:
     createCloudAccount:
       type: object
       x-examples:
-        example-2:
+        example-1:
           name: string
           subscriptionId: string
           region:
             id: 0
             name: string
-          accessNodes:
+          backupGateways:
             - id: 0
               name: string
-          Credential:
+          credential:
             id: 0
             name: string
-          Company:
+          company:
             id: 0
             name: string
       description: Payload for cloud Account Creation
@@ -2456,7 +2456,7 @@ components:
           description: Subscription ID
         region:
           $ref: '#/components/schemas/IdName'
-        accessNodes:
+        backupGateways:
           $ref: '#/components/schemas/accessNodes'
         credential:
           $ref: '#/components/schemas/IdName'
@@ -2466,6 +2466,7 @@ components:
         - name
         - subscriptionId
         - region
+        - backupGateways
     createStoragePool:
       type: object
       x-examples:
@@ -2483,6 +2484,7 @@ components:
           accessNodes:
             - id: 0
               name: string
+      description: ''
       properties:
         type:
           type: string
@@ -2507,12 +2509,11 @@ components:
         container:
           type: string
           description: Container / Library Name
-        accessNodes:
+        backupGateways:
           $ref: '#/components/schemas/accessNodes'
       required:
         - type
         - region
-      description: ''
     getCloudAppsList:
       type: object
       x-examples:
@@ -2797,6 +2798,27 @@ components:
         id: kkms0vrv6xufm
       type: object
       description: Create the DB Instance for the type Maria/MySQL/PostGreSQL Instance
+      x-examples:
+        example-1:
+          dbInstanceIdentifier: string
+          region:
+            id: 0
+            name: string
+          cloudAccount:
+            id: 0
+            name: string
+          database:
+            username: string
+            password: string
+          endPoint: string
+          port: 0
+          SSL_CA_Certificate: string
+          plan:
+            id: 0
+            name: string
+          accessNodes:
+            - id: 0
+              name: string
       properties:
         dbInstanceIdentifier:
           type: string
@@ -2822,7 +2844,7 @@ components:
           type: string
         plan:
           $ref: '#/components/schemas/IdName'
-        accessNodes:
+        backupGateways:
           $ref: '#/components/schemas/accessNodes'
       required:
         - dbInstanceIdentifier
@@ -2832,28 +2854,7 @@ components:
         - endPoint
         - port
         - plan
-        - accessNodes
-      x-examples:
-        example-1:
-          dbInstanceIdentifier: string
-          region:
-            id: 0
-            name: string
-          cloudAccount:
-            id: 0
-            name: string
-          database:
-            username: string
-            password: string
-          endPoint: string
-          port: 0
-          SSL_CA_Certificate: string
-          plan:
-            id: 0
-            name: string
-          accessNodes:
-            - id: 0
-              name: string
+        - backupGateways
     cloudDBContentPreview:
       title: cloudDBContentPreview
       x-stoplight:
@@ -3087,7 +3088,7 @@ components:
           $ref: '#/components/schemas/IdName'
         cloudAccount:
           $ref: '#/components/schemas/IdName'
-        accessNodes:
+        backupGateways:
           $ref: '#/components/schemas/accessNodes'
         company:
           $ref: '#/components/schemas/IdName'
@@ -3098,7 +3099,7 @@ components:
         - connectionString
         - credential
         - cloudAccount
-        - accessNodes
+        - backupGateways
         - plan
     geMSSQLInstances:
       type: object
@@ -3241,19 +3242,6 @@ components:
       x-stoplight:
         id: qo64icuhxdimg
       type: object
-      properties:
-        cloudAccount:
-          $ref: '#/components/schemas/IdName'
-        region:
-          $ref: '#/components/schemas/IdName'
-        plan:
-          $ref: '#/components/schemas/IdName'
-        accessNodes:
-          $ref: '#/components/schemas/accessNodes'
-      required:
-        - cloudAccount
-        - region
-        - plan
       x-examples:
         example-1:
           cloudAccount:
@@ -3269,3 +3257,16 @@ components:
             - id: 0
               name: string
       description: Create a cosmos DB Instance
+      properties:
+        cloudAccount:
+          $ref: '#/components/schemas/IdName'
+        region:
+          $ref: '#/components/schemas/IdName'
+        plan:
+          $ref: '#/components/schemas/IdName'
+        backupGateways:
+          $ref: '#/components/schemas/accessNodes'
+      required:
+        - cloudAccount
+        - region
+        - plan
