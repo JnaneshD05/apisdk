@@ -357,7 +357,7 @@ paths:
           in: query
           name: regionId
           description: Region Id
-      description: Get Azure DB MSSQL AccessNodes
+      description: Get Azure DB MSSQL BackupGateways
     parameters: []
   /V4/AzureDB/Storage/Azure/Credentials:
     get:
@@ -520,7 +520,7 @@ paths:
                   credential:
                     id: 350
                   container: somecontanier
-                  accessNodes:
+                  backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
   /V4/AzureDB/Plans:
@@ -2469,21 +2469,7 @@ components:
         - backupGateways
     createStoragePool:
       type: object
-      x-examples:
-        example-2:
-          storageType: Metallic
-          name: string
-          credential:
-            id: 0
-            name: string
-          region:
-            id: 0
-            name: string
-          storageClass: MRR_HOT
-          container: string
-          accessNodes:
-            - id: 0
-              name: string
+      x-examples: {}
       description: ''
       properties:
         type:
@@ -3058,25 +3044,7 @@ components:
         id: hvveayk47owql
       type: object
       description: Create instance of MSSQL Azure
-      x-examples:
-        example-1:
-          instanceName: string
-          connectionString: string
-          credential:
-            id: 0
-            name: string
-          cloudAccount:
-            id: 0
-            name: string
-          accessNodes:
-            - id: 0
-              name: string
-          company:
-            id: 0
-            name: string
-          plan:
-            id: 0
-            name: string
+      x-examples: {}
       properties:
         instanceName:
           type: string
@@ -3242,20 +3210,7 @@ components:
       x-stoplight:
         id: qo64icuhxdimg
       type: object
-      x-examples:
-        example-1:
-          cloudAccount:
-            id: 0
-            name: string
-          region:
-            id: 0
-            name: string
-          plan:
-            id: 0
-            name: string
-          accessNodes:
-            - id: 0
-              name: string
+      x-examples: {}
       description: Create a cosmos DB Instance
       properties:
         cloudAccount:
