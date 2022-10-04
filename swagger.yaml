@@ -1843,7 +1843,7 @@ paths:
                         instanceCreateTime: 2927956568
                         dBInstanceClass: ''
                         dbSecurityGroup: ''
-                        endPoint: mysqltestserver.mysql.database.azure.com
+                        endPoint: ***.**.**.**.com
                         port: 3306
                         licenseModel: ''
                         preferredMaintenanceWindow: ''
