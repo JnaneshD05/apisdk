@@ -1669,7 +1669,7 @@ paths:
               example-1:
                 value:
                   name: new_cloudaccount_test6
-                  subscriptionId: 2c21f3cf-d49e-43c1-a19b-16b9886f4b25
+                  subscriptionId: xxx
                   region:
                     id: 9
                   backupGateways:
@@ -1974,7 +1974,7 @@ paths:
                         instanceCreateTime: 2927961440
                         dBInstanceClass: ''
                         dbSecurityGroup: ''
-                        endPoint: pg11servereastus.postgres.database.azure.com
+                        endPoint: xxx
                         port: 5432
                         licenseModel: ''
                         preferredMaintenanceWindow: ''
@@ -2002,7 +2002,7 @@ paths:
                         instanceCreateTime: 2927961440
                         dBInstanceClass: ''
                         dbSecurityGroup: ''
-                        endPoint: jah-pgdb.postgres.database.azure.com
+                        endPoint: xxx
                         port: 5432
                         licenseModel: ''
                         preferredMaintenanceWindow: ''
@@ -3075,7 +3075,7 @@ components:
         example-1:
           sqlDiscoveredServer:
             - type: Azure Managed DataBase Engine
-              name: sqlami-eastus.0b6ca3d85c3b.database.windows.net
+              name: xxx
       properties:
         sqlDiscoveredServer:
           type: array
