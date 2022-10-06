@@ -207,135 +207,14 @@ paths:
       operationId: get-V4-Metallic-Azure-Regions
       description: Get the list of regions (Azure)
     parameters: []
-  /V4/AzureDB/Cosmos/BackupGateway:
+  /V4/AzureDB/BackupGateway:
     get:
-      summary: Get backup gateways azure Cosmos DB
+      summary: Get backup gateways azure DB
       tags:
         - Cosmos
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getbackupgateways'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1857
-                        name: Backupgateway-e4c581a8-f98a-49fa-8766-793163f5b790
-      operationId: get-V4-Metallic-Azure-CosmosDB-BackupGateways
-      parameters:
-        - schema:
-            type: integer
-          in: query
-          name: regionId
-          description: Region Id
-      description: Get backup gateways azure Cosmos DB
-    parameters: []
-  /V4/AzureDB/Maria/BackupGateway:
-    get:
-      summary: Get backup gateways for azure MariaDB
-      tags:
         - Maria
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getbackupgateways'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1860
-                        name: azmetallic3-d2f53950-9716-48f0-91b7-88e8ab591040
-                      - id: 1898
-                        name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
-                      - id: 1970
-                        name: azmetallic6-9c80cdf5-9525-4a3f-9666-a5260a45a938
-                      - id: 1848
-                        name: Backupgateway-324874db-2ef7-4bbc-9779-a1a18fc3d44c
-                      - id: 1935
-                        name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
-                      - id: 1912
-                        name: SQLVMEastUS-59bf9cc7-a0c1-4ae0-a7de-3357598cdf1b
-      operationId: get-V4-Metallic-Azure-MariaDB-BackupGateways
-      parameters:
-        - schema:
-            type: number
-          in: query
-          name: regionId
-          description: Region
-    parameters: []
-  /V4/AzureDB/MySQL/BackupGateway:
-    get:
-      summary: Get Backup Gateways for Azure MySQL DB
-      tags:
         - MySQL
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getbackupgateways'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1857
-                        name: Backupgateway-e4c581a8-f98a-49fa-8766-793163f5b790
-      operationId: get-V4-Metallic-Azure-MySQL-BackupGateways
-      parameters:
-        - schema:
-            type: integer
-          in: query
-          name: regionId
-          description: Region Id
-    parameters: []
-  /V4/AzureDB/PostgreSQL/BackupGateway:
-    get:
-      summary: Get backup gateways for Azure PostgreSQL DB
-      tags:
         - PostgreSQL
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getbackupgateways'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1860
-                        name: azmetallic3-d2f53950-9716-48f0-91b7-88e8ab591040
-                      - id: 1898
-                        name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
-                      - id: 1970
-                        name: azmetallic6-9c80cdf5-9525-4a3f-9666-a5260a45a938
-                      - id: 1848
-                        name: Backupgateway-324874db-2ef7-4bbc-9779-a1a18fc3d44c
-                      - id: 1935
-                        name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
-                      - id: 1912
-                        name: SQLVMEastUS-59bf9cc7-a0c1-4ae0-a7de-3357598cdf1b
-      operationId: get-V4-Metallic-Azure-PostreSQL-BackupGateways
-      parameters:
-        - schema:
-            type: integer
-          in: query
-          name: regionId
-          description: Region Id
-    parameters: []
-  /V4/AzureDB/MSSQL/BackupGateway:
-    get:
-      summary: Get backup gateways azure msssql
-      tags:
         - MSSQL
       responses:
         '200':
@@ -347,17 +226,30 @@ paths:
               examples:
                 example-1:
                   value:
-                    clients:
+                    backupGateways:
                       - id: 1857
                         name: Backupgateway-e4c581a8-f98a-49fa-8766-793163f5b790
-      operationId: get-V4-Metallic-Azure-MSSQL-BackupGateways
+                example-2:
+                  value:
+                    backupGateways:
+                      - id: 2053
+                        name: az-m035test-93d4172b-133d-4f28-a486-aea16b6c2f83
+                      - id: 1860
+                        name: azmetallic3-d2f53950-9716-48f0-91b7-88e8ab591040
+                      - id: 1898
+                        name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
+                      - id: 1935
+                        name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
+                      - id: 1912
+                        name: SQLVMEastUS-59bf9cc7-a0c1-4ae0-a7de-3357598cdf1b
+      operationId: get-V4-Metallic-Azure-CosmosDB-BackupGateways
       parameters:
         - schema:
             type: integer
           in: query
           name: regionId
           description: Region Id
-      description: Get Azure DB MSSQL BackupGateways
+      description: Get backup gateways azure Cosmos DB
     parameters: []
   /V4/AzureDB/Storage/Azure/Credentials:
     get:
@@ -476,18 +368,61 @@ paths:
               schema:
                 $ref: '#/components/schemas/IdName'
               examples:
-                example-1:
+                Create storage pool of type MRR_COOl:
                   value:
                     id: 1897
                     name: cvmetallic-azuredb1-server-eastus2
-                example-2:
+                'Create storage pool of Azure type ':
                   value:
                     id: 2102
                     name: CVMetallic-AzureDB1-Cloud storage teststorage
-                example-3:
+                Create storage pool of Azure type with backupGateways in payload:
                   value:
                     id: 2103
                     name: CVMetallic-AzureDB1-Cloud storage teststorage7
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    failedStage: PostStoragePool1
+                    errorCode: -1
+                    errorMessage: null
+                properties:
+                  failedStage:
+                    type: string
+                  errorCode:
+                    type: integer
+                  errorMessage:
+                    oneOf:
+                      - type: string
+                      - type: object
+                        properties:
+                          errorMessage:
+                            type: string
+                          errorCode:
+                            type: string
+              examples:
+                Invalid storage class in payload:
+                  value:
+                    failedStage: PostStoragePool1
+                    errorCode: -1
+                    errorMessage: 'null'
+                Storage pool already exists:
+                  value:
+                    failedStage: PostStoragePool1
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: 'Library [CVMetallic-AzureDB1-Cloud storage] already exists. Please enter unique library name.'
+                      errorCode: '1'
+                Invalid type in payload:
+                  value:
+                    failedStage: string
+                    errorCode: 0
+                    errorMessage: 'null'
       description: Create storage pool
       requestBody:
         content:
@@ -495,13 +430,13 @@ paths:
             schema:
               $ref: '#/components/schemas/createStoragePool'
             examples:
-              example-1:
+              Create storage pool of type MRR_COOl:
                 value:
                   type: Metallic
                   region:
                     id: 9
                   storageClass: MRR_COOL
-              example-2:
+              'Create storage pool of Azure type ':
                 value:
                   type: Azure
                   name: CVMetallic-AzureDB1-Cloud storage teststorage
@@ -510,7 +445,7 @@ paths:
                   credential:
                     id: 350
                   container: somecontanier
-              example-3:
+              Create storage pool of Azure type with backupGateways in payload:
                 value:
                   type: Azure
                   name: CVMetallic-AzureDB1-Cloud storage teststorage7
@@ -523,6 +458,30 @@ paths:
                   backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
+              Invalid storage class in payload:
+                value:
+                  type: Metallic
+                  region:
+                    id: 9
+                  storageClass: ''
+              Storage Pool Already exist:
+                value:
+                  type: Azure
+                  name: CVMetallic-AzureDB1-Cloud storage
+                  region:
+                    id: 9
+                  credential:
+                    id: 350
+                  container: somecontanier
+              Invalid type in payload:
+                value:
+                  type: azre
+                  name: CVMetallic-AzureDB1-Cloud storage
+                  region:
+                    id: 9
+                  credential:
+                    id: 350
+                  container: somecontanier
   /V4/AzureDB/Plans:
     get:
       summary: Get eligible Plans
@@ -719,924 +678,6 @@ paths:
       operationId: get-V4-Metallic-Azure-SavedCredentials
       description: Get saved credentials for cloud account
     parameters: []
-  /V4/AzureDB/Cosmos/CloudAccount:
-    get:
-      summary: Get cloud accounts for CosmosDB
-      tags:
-        - Cosmos
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCloudAppsList'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1843
-                        name: CosmosDBMI
-                        displayName: CosmosDBMI
-                      - id: 1844
-                        name: AzureSQLregular
-                        displayName: AzureSQLregular
-                      - id: 1845
-                        name: CosmosDBreg
-                        displayName: CosmosDBreg
-                      - id: 1846
-                        name: SQLMItest
-                        displayName: SQLMItest
-                      - id: 1858
-                        name: AzureDB-Chris
-                        displayName: AzureDB-Chris
-                      - id: 1859
-                        name: Azure-DB2-ssl
-                        displayName: Azure-DB2-ssl
-                      - id: 1861
-                        name: Azure-DB3-manualdeployed
-                        displayName: Azure-DB3-manualdeployed
-                      - id: 1863
-                        name: AzureSQL-SQLRMApp
-                        displayName: AzureSQL-SQLRMApp
-                      - id: 1864
-                        name: AzmangInstregular
-                        displayName: AzmangInstregular
-                      - id: 1865
-                        name: venkat-sqlserver
-                        displayName: venkat-sqlserver
-                      - id: 1867
-                        name: TestCloudAccountformysql
-                        displayName: TestCloudAccountformysql
-                      - id: 1868
-                        name: TestCloudAccountformysql-2
-                        displayName: TestCloudAccountformysql-2
-                      - id: 1871
-                        name: Azure-DB3-ametallic3
-                        displayName: Azure-DB3-ametallic3
-                      - id: 1877
-                        name: TestCloudAccountformysql-3
-                        displayName: TestCloudAccountformysql-3
-                      - id: 1879
-                        name: AzureDB-Chris-EastUS
-                        displayName: AzureDB-Chris-EastUS
-                      - id: 1880
-                        name: CosmosUSCenteralMI
-                        displayName: CosmosUSCenteralMI
-                      - id: 1881
-                        name: EastUSManid
-                        displayName: EastUSManid
-                      - id: 1895
-                        name: test-CA
-                        displayName: test-CA
-                      - id: 1900
-                        name: SQLVMEastUSMId
-                        displayName: SQLVMEastUSMId
-                      - id: 1908
-                        name: azure5-userMI
-                        displayName: azure5-userMI
-                      - id: 1913
-                        name: AzureSQL_MI-Chris
-                        displayName: AzureSQL_MI-Chris
-                      - id: 1915
-                        name: ManInstApp
-                        displayName: ManInstApp
-                      - id: 1917
-                        name: westusManId
-                        displayName: westusManId
-                      - id: 1918
-                        name: venkatMI
-                        displayName: venkatMI
-                      - id: 1919
-                        name: vmtesuswest_ManIden
-                        displayName: vmtesuswest_ManIden
-                      - id: 1920
-                        name: CentralUSSysMaid
-                        displayName: CentralUSSysMaid
-                      - id: 1921
-                        name: New_Cosmos_UserIden
-                        displayName: New_Cosmos_UserIden
-                      - id: 1922
-                        name: uswestsystemident
-                        displayName: uswestsystemident
-                      - id: 1933
-                        name: 78sysidenvmwest_2
-                        displayName: 78sysidenvmwest_2
-                      - id: 1936
-                        name: NewEsaUsmanid
-                        displayName: NewEsaUsmanid
-                      - id: 1937
-                        name: AzureSQL-Chris-SSMS
-                        displayName: AzureSQL-Chris-SSMS
-                      - id: 1939
-                        name: Azure-workloadtest
-                        displayName: Azure-workloadtest
-                      - id: 1940
-                        name: SQLVMEast_UserManId
-                        displayName: SQLVMEast_UserManId
-                      - id: 1941
-                        name: eastus2sysmanid1
-                        displayName: eastus2sysmanid1
-                      - id: 1942
-                        name: sqlvmeastususerManId1
-                        displayName: sqlvmeastususerManId1
-                      - id: 1943
-                        name: SSMSUserMaId2
-                        displayName: SSMSUserMaId2
-                      - id: 1950
-                        name: SQLVMSSMS_UserMaId
-                        displayName: SQLVMSSMS_UserMaId
-                      - id: 1953
-                        name: Azure-WorkloadTest1
-                        displayName: Azure-WorkloadTest1
-                      - id: 1956
-                        name: Azure5-CA5
-                        displayName: Azure5-CA5
-                      - id: 1964
-                        name: azure5-CA6
-                        displayName: azure5-CA6
-                      - id: 1966
-                        name: accessnode-test
-                        displayName: accessnode-test
-                      - id: 1973
-                        name: azure5-MI
-                        displayName: azure5-MI
-                      - id: 1984
-                        name: cindia-CA
-                        displayName: cindia-CA
-                      - id: 1996
-                        name: testcloudaccount
-                        displayName: testcloudaccount
-                      - id: 1997
-                        name: testaccount2_
-                        displayName: testaccount2_
-                      - id: 1998
-                        name: testaccount2__
-                        displayName: testaccount2__
-                      - id: 1999
-                        name: testaccount3__
-                        displayName: testaccount3__
-                      - id: 2001
-                        name: testclientName
-                        displayName: testclientName
-                      - id: 2002
-                        name: testclientName1
-                        displayName: testclientName1
-                      - id: 2003
-                        name: Chris-Azure-RoleTest-MI
-                        displayName: Chris-Azure-RoleTest-MI
-                      - id: 2007
-                        name: new_cloudaccounttest
-                        displayName: new_cloudaccounttest
-                      - id: 2015
-                        name: new_cloudaccount_test6
-                        displayName: new_cloudaccount_test6
-                      - id: 2034
-                        name: new_cloudaccount_test7
-                        displayName: new_cloudaccount_test7
-                      - id: 2036
-                        name: new_cloudaccount_test8
-                        displayName: new_cloudaccount_test8
-                      - id: 2038
-                        name: atest_msslq
-                        displayName: atest_msslq
-      operationId: get-V4-Metallic-Azure-CosmosDB-CloudAccount
-    parameters: []
-  /V4/AzureDB/Maria/CloudAccount:
-    get:
-      summary: Get Cloud Account for Maria DB
-      tags:
-        - Maria
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCloudAppsList'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1843
-                        name: CosmosDBMI
-                        displayName: CosmosDBMI
-                      - id: 1844
-                        name: AzureSQLregular
-                        displayName: AzureSQLregular
-                      - id: 1845
-                        name: CosmosDBreg
-                        displayName: CosmosDBreg
-                      - id: 1846
-                        name: SQLMItest
-                        displayName: SQLMItest
-                      - id: 1858
-                        name: AzureDB-Chris
-                        displayName: AzureDB-Chris
-                      - id: 1859
-                        name: Azure-DB2-ssl
-                        displayName: Azure-DB2-ssl
-                      - id: 1861
-                        name: Azure-DB3-manualdeployed
-                        displayName: Azure-DB3-manualdeployed
-                      - id: 1863
-                        name: AzureSQL-SQLRMApp
-                        displayName: AzureSQL-SQLRMApp
-                      - id: 1864
-                        name: AzmangInstregular
-                        displayName: AzmangInstregular
-                      - id: 1865
-                        name: venkat-sqlserver
-                        displayName: venkat-sqlserver
-                      - id: 1867
-                        name: TestCloudAccountformysql
-                        displayName: TestCloudAccountformysql
-                      - id: 1868
-                        name: TestCloudAccountformysql-2
-                        displayName: TestCloudAccountformysql-2
-                      - id: 1871
-                        name: Azure-DB3-ametallic3
-                        displayName: Azure-DB3-ametallic3
-                      - id: 1877
-                        name: TestCloudAccountformysql-3
-                        displayName: TestCloudAccountformysql-3
-                      - id: 1879
-                        name: AzureDB-Chris-EastUS
-                        displayName: AzureDB-Chris-EastUS
-                      - id: 1880
-                        name: CosmosUSCenteralMI
-                        displayName: CosmosUSCenteralMI
-                      - id: 1881
-                        name: EastUSManid
-                        displayName: EastUSManid
-                      - id: 1895
-                        name: test-CA
-                        displayName: test-CA
-                      - id: 1900
-                        name: SQLVMEastUSMId
-                        displayName: SQLVMEastUSMId
-                      - id: 1908
-                        name: azure5-userMI
-                        displayName: azure5-userMI
-                      - id: 1913
-                        name: AzureSQL_MI-Chris
-                        displayName: AzureSQL_MI-Chris
-                      - id: 1915
-                        name: ManInstApp
-                        displayName: ManInstApp
-                      - id: 1917
-                        name: westusManId
-                        displayName: westusManId
-                      - id: 1918
-                        name: venkatMI
-                        displayName: venkatMI
-                      - id: 1919
-                        name: vmtesuswest_ManIden
-                        displayName: vmtesuswest_ManIden
-                      - id: 1920
-                        name: CentralUSSysMaid
-                        displayName: CentralUSSysMaid
-                      - id: 1921
-                        name: New_Cosmos_UserIden
-                        displayName: New_Cosmos_UserIden
-                      - id: 1922
-                        name: uswestsystemident
-                        displayName: uswestsystemident
-                      - id: 1933
-                        name: 78sysidenvmwest_2
-                        displayName: 78sysidenvmwest_2
-                      - id: 1936
-                        name: NewEsaUsmanid
-                        displayName: NewEsaUsmanid
-                      - id: 1937
-                        name: AzureSQL-Chris-SSMS
-                        displayName: AzureSQL-Chris-SSMS
-                      - id: 1939
-                        name: Azure-workloadtest
-                        displayName: Azure-workloadtest
-                      - id: 1940
-                        name: SQLVMEast_UserManId
-                        displayName: SQLVMEast_UserManId
-                      - id: 1941
-                        name: eastus2sysmanid1
-                        displayName: eastus2sysmanid1
-                      - id: 1942
-                        name: sqlvmeastususerManId1
-                        displayName: sqlvmeastususerManId1
-                      - id: 1943
-                        name: SSMSUserMaId2
-                        displayName: SSMSUserMaId2
-                      - id: 1950
-                        name: SQLVMSSMS_UserMaId
-                        displayName: SQLVMSSMS_UserMaId
-                      - id: 1953
-                        name: Azure-WorkloadTest1
-                        displayName: Azure-WorkloadTest1
-                      - id: 1956
-                        name: Azure5-CA5
-                        displayName: Azure5-CA5
-                      - id: 1964
-                        name: azure5-CA6
-                        displayName: azure5-CA6
-                      - id: 1966
-                        name: accessnode-test
-                        displayName: accessnode-test
-                      - id: 1973
-                        name: azure5-MI
-                        displayName: azure5-MI
-                      - id: 1984
-                        name: cindia-CA
-                        displayName: cindia-CA
-                      - id: 1996
-                        name: testcloudaccount
-                        displayName: testcloudaccount
-                      - id: 1997
-                        name: testaccount2_
-                        displayName: testaccount2_
-                      - id: 1998
-                        name: testaccount2__
-                        displayName: testaccount2__
-                      - id: 1999
-                        name: testaccount3__
-                        displayName: testaccount3__
-                      - id: 2001
-                        name: testclientName
-                        displayName: testclientName
-                      - id: 2002
-                        name: testclientName1
-                        displayName: testclientName1
-                      - id: 2003
-                        name: Chris-Azure-RoleTest-MI
-                        displayName: Chris-Azure-RoleTest-MI
-                      - id: 2007
-                        name: new_cloudaccounttest
-                        displayName: new_cloudaccounttest
-                      - id: 2015
-                        name: new_cloudaccount_test6
-                        displayName: new_cloudaccount_test6
-                      - id: 2034
-                        name: new_cloudaccount_test7
-                        displayName: new_cloudaccount_test7
-                      - id: 2036
-                        name: new_cloudaccount_test8
-                        displayName: new_cloudaccount_test8
-                      - id: 2038
-                        name: atest_msslq
-                        displayName: atest_msslq
-      operationId: get-V4-Metallic-Azure-MariaDB-CloudAccount
-    parameters: []
-  /V4/AzureDB/MySQL/CloudAccount:
-    get:
-      summary: Get Cloud Accounts for MySQL DB
-      tags:
-        - MySQL
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCloudAppsList'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1843
-                        name: CosmosDBMI
-                        displayName: CosmosDBMI
-                      - id: 1844
-                        name: AzureSQLregular
-                        displayName: AzureSQLregular
-                      - id: 1845
-                        name: CosmosDBreg
-                        displayName: CosmosDBreg
-                      - id: 1846
-                        name: SQLMItest
-                        displayName: SQLMItest
-                      - id: 1858
-                        name: AzureDB-Chris
-                        displayName: AzureDB-Chris
-                      - id: 1859
-                        name: Azure-DB2-ssl
-                        displayName: Azure-DB2-ssl
-                      - id: 1861
-                        name: Azure-DB3-manualdeployed
-                        displayName: Azure-DB3-manualdeployed
-                      - id: 1863
-                        name: AzureSQL-SQLRMApp
-                        displayName: AzureSQL-SQLRMApp
-                      - id: 1864
-                        name: AzmangInstregular
-                        displayName: AzmangInstregular
-                      - id: 1865
-                        name: venkat-sqlserver
-                        displayName: venkat-sqlserver
-                      - id: 1867
-                        name: TestCloudAccountformysql
-                        displayName: TestCloudAccountformysql
-                      - id: 1868
-                        name: TestCloudAccountformysql-2
-                        displayName: TestCloudAccountformysql-2
-                      - id: 1871
-                        name: Azure-DB3-ametallic3
-                        displayName: Azure-DB3-ametallic3
-                      - id: 1877
-                        name: TestCloudAccountformysql-3
-                        displayName: TestCloudAccountformysql-3
-                      - id: 1879
-                        name: AzureDB-Chris-EastUS
-                        displayName: AzureDB-Chris-EastUS
-                      - id: 1880
-                        name: CosmosUSCenteralMI
-                        displayName: CosmosUSCenteralMI
-                      - id: 1881
-                        name: EastUSManid
-                        displayName: EastUSManid
-                      - id: 1895
-                        name: test-CA
-                        displayName: test-CA
-                      - id: 1900
-                        name: SQLVMEastUSMId
-                        displayName: SQLVMEastUSMId
-                      - id: 1908
-                        name: azure5-userMI
-                        displayName: azure5-userMI
-                      - id: 1913
-                        name: AzureSQL_MI-Chris
-                        displayName: AzureSQL_MI-Chris
-                      - id: 1915
-                        name: ManInstApp
-                        displayName: ManInstApp
-                      - id: 1917
-                        name: westusManId
-                        displayName: westusManId
-                      - id: 1918
-                        name: venkatMI
-                        displayName: venkatMI
-                      - id: 1919
-                        name: vmtesuswest_ManIden
-                        displayName: vmtesuswest_ManIden
-                      - id: 1920
-                        name: CentralUSSysMaid
-                        displayName: CentralUSSysMaid
-                      - id: 1921
-                        name: New_Cosmos_UserIden
-                        displayName: New_Cosmos_UserIden
-                      - id: 1922
-                        name: uswestsystemident
-                        displayName: uswestsystemident
-                      - id: 1933
-                        name: 78sysidenvmwest_2
-                        displayName: 78sysidenvmwest_2
-                      - id: 1936
-                        name: NewEsaUsmanid
-                        displayName: NewEsaUsmanid
-                      - id: 1937
-                        name: AzureSQL-Chris-SSMS
-                        displayName: AzureSQL-Chris-SSMS
-                      - id: 1939
-                        name: Azure-workloadtest
-                        displayName: Azure-workloadtest
-                      - id: 1940
-                        name: SQLVMEast_UserManId
-                        displayName: SQLVMEast_UserManId
-                      - id: 1941
-                        name: eastus2sysmanid1
-                        displayName: eastus2sysmanid1
-                      - id: 1942
-                        name: sqlvmeastususerManId1
-                        displayName: sqlvmeastususerManId1
-                      - id: 1943
-                        name: SSMSUserMaId2
-                        displayName: SSMSUserMaId2
-                      - id: 1950
-                        name: SQLVMSSMS_UserMaId
-                        displayName: SQLVMSSMS_UserMaId
-                      - id: 1953
-                        name: Azure-WorkloadTest1
-                        displayName: Azure-WorkloadTest1
-                      - id: 1956
-                        name: Azure5-CA5
-                        displayName: Azure5-CA5
-                      - id: 1964
-                        name: azure5-CA6
-                        displayName: azure5-CA6
-                      - id: 1966
-                        name: accessnode-test
-                        displayName: accessnode-test
-                      - id: 1973
-                        name: azure5-MI
-                        displayName: azure5-MI
-                      - id: 1984
-                        name: cindia-CA
-                        displayName: cindia-CA
-                      - id: 1996
-                        name: testcloudaccount
-                        displayName: testcloudaccount
-                      - id: 1997
-                        name: testaccount2_
-                        displayName: testaccount2_
-                      - id: 1998
-                        name: testaccount2__
-                        displayName: testaccount2__
-                      - id: 1999
-                        name: testaccount3__
-                        displayName: testaccount3__
-                      - id: 2001
-                        name: testclientName
-                        displayName: testclientName
-                      - id: 2002
-                        name: testclientName1
-                        displayName: testclientName1
-                      - id: 2003
-                        name: Chris-Azure-RoleTest-MI
-                        displayName: Chris-Azure-RoleTest-MI
-                      - id: 2007
-                        name: new_cloudaccounttest
-                        displayName: new_cloudaccounttest
-                      - id: 2015
-                        name: new_cloudaccount_test6
-                        displayName: new_cloudaccount_test6
-                      - id: 2034
-                        name: new_cloudaccount_test7
-                        displayName: new_cloudaccount_test7
-                      - id: 2036
-                        name: new_cloudaccount_test8
-                        displayName: new_cloudaccount_test8
-                      - id: 2038
-                        name: atest_msslq
-                        displayName: atest_msslq
-      operationId: get-V4-Metallic-Azure-MySQL-CloudAccount
-    parameters: []
-  /V4/AzureDB/PostgreSQL/CloudAccount:
-    get:
-      summary: GET Cloud Accounts for PostgreSQL
-      tags:
-        - PostgreSQL
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCloudAppsList'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1843
-                        name: CosmosDBMI
-                        displayName: CosmosDBMI
-                      - id: 1844
-                        name: AzureSQLregular
-                        displayName: AzureSQLregular
-                      - id: 1845
-                        name: CosmosDBreg
-                        displayName: CosmosDBreg
-                      - id: 1846
-                        name: SQLMItest
-                        displayName: SQLMItest
-                      - id: 1858
-                        name: AzureDB-Chris
-                        displayName: AzureDB-Chris
-                      - id: 1859
-                        name: Azure-DB2-ssl
-                        displayName: Azure-DB2-ssl
-                      - id: 1861
-                        name: Azure-DB3-manualdeployed
-                        displayName: Azure-DB3-manualdeployed
-                      - id: 1863
-                        name: AzureSQL-SQLRMApp
-                        displayName: AzureSQL-SQLRMApp
-                      - id: 1864
-                        name: AzmangInstregular
-                        displayName: AzmangInstregular
-                      - id: 1865
-                        name: venkat-sqlserver
-                        displayName: venkat-sqlserver
-                      - id: 1867
-                        name: TestCloudAccountformysql
-                        displayName: TestCloudAccountformysql
-                      - id: 1868
-                        name: TestCloudAccountformysql-2
-                        displayName: TestCloudAccountformysql-2
-                      - id: 1871
-                        name: Azure-DB3-ametallic3
-                        displayName: Azure-DB3-ametallic3
-                      - id: 1877
-                        name: TestCloudAccountformysql-3
-                        displayName: TestCloudAccountformysql-3
-                      - id: 1879
-                        name: AzureDB-Chris-EastUS
-                        displayName: AzureDB-Chris-EastUS
-                      - id: 1880
-                        name: CosmosUSCenteralMI
-                        displayName: CosmosUSCenteralMI
-                      - id: 1881
-                        name: EastUSManid
-                        displayName: EastUSManid
-                      - id: 1895
-                        name: test-CA
-                        displayName: test-CA
-                      - id: 1900
-                        name: SQLVMEastUSMId
-                        displayName: SQLVMEastUSMId
-                      - id: 1908
-                        name: azure5-userMI
-                        displayName: azure5-userMI
-                      - id: 1913
-                        name: AzureSQL_MI-Chris
-                        displayName: AzureSQL_MI-Chris
-                      - id: 1915
-                        name: ManInstApp
-                        displayName: ManInstApp
-                      - id: 1917
-                        name: westusManId
-                        displayName: westusManId
-                      - id: 1918
-                        name: venkatMI
-                        displayName: venkatMI
-                      - id: 1919
-                        name: vmtesuswest_ManIden
-                        displayName: vmtesuswest_ManIden
-                      - id: 1920
-                        name: CentralUSSysMaid
-                        displayName: CentralUSSysMaid
-                      - id: 1921
-                        name: New_Cosmos_UserIden
-                        displayName: New_Cosmos_UserIden
-                      - id: 1922
-                        name: uswestsystemident
-                        displayName: uswestsystemident
-                      - id: 1933
-                        name: 78sysidenvmwest_2
-                        displayName: 78sysidenvmwest_2
-                      - id: 1936
-                        name: NewEsaUsmanid
-                        displayName: NewEsaUsmanid
-                      - id: 1937
-                        name: AzureSQL-Chris-SSMS
-                        displayName: AzureSQL-Chris-SSMS
-                      - id: 1939
-                        name: Azure-workloadtest
-                        displayName: Azure-workloadtest
-                      - id: 1940
-                        name: SQLVMEast_UserManId
-                        displayName: SQLVMEast_UserManId
-                      - id: 1941
-                        name: eastus2sysmanid1
-                        displayName: eastus2sysmanid1
-                      - id: 1942
-                        name: sqlvmeastususerManId1
-                        displayName: sqlvmeastususerManId1
-                      - id: 1943
-                        name: SSMSUserMaId2
-                        displayName: SSMSUserMaId2
-                      - id: 1950
-                        name: SQLVMSSMS_UserMaId
-                        displayName: SQLVMSSMS_UserMaId
-                      - id: 1953
-                        name: Azure-WorkloadTest1
-                        displayName: Azure-WorkloadTest1
-                      - id: 1956
-                        name: Azure5-CA5
-                        displayName: Azure5-CA5
-                      - id: 1964
-                        name: azure5-CA6
-                        displayName: azure5-CA6
-                      - id: 1966
-                        name: accessnode-test
-                        displayName: accessnode-test
-                      - id: 1973
-                        name: azure5-MI
-                        displayName: azure5-MI
-                      - id: 1984
-                        name: cindia-CA
-                        displayName: cindia-CA
-                      - id: 1996
-                        name: testcloudaccount
-                        displayName: testcloudaccount
-                      - id: 1997
-                        name: testaccount2_
-                        displayName: testaccount2_
-                      - id: 1998
-                        name: testaccount2__
-                        displayName: testaccount2__
-                      - id: 1999
-                        name: testaccount3__
-                        displayName: testaccount3__
-                      - id: 2001
-                        name: testclientName
-                        displayName: testclientName
-                      - id: 2002
-                        name: testclientName1
-                        displayName: testclientName1
-                      - id: 2003
-                        name: Chris-Azure-RoleTest-MI
-                        displayName: Chris-Azure-RoleTest-MI
-                      - id: 2007
-                        name: new_cloudaccounttest
-                        displayName: new_cloudaccounttest
-                      - id: 2015
-                        name: new_cloudaccount_test6
-                        displayName: new_cloudaccount_test6
-                      - id: 2034
-                        name: new_cloudaccount_test7
-                        displayName: new_cloudaccount_test7
-                      - id: 2036
-                        name: new_cloudaccount_test8
-                        displayName: new_cloudaccount_test8
-                      - id: 2038
-                        name: atest_msslq
-                        displayName: atest_msslq
-      operationId: get-V4-Metallic-PostgreSQL-CloudAccount
-      description: ''
-    parameters: []
-  /V4/AzureDB/MSSQL/CloudAccount:
-    get:
-      summary: Get cloud accounts for azure MSSQL Database
-      tags:
-        - MSSQL
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCloudAppsList'
-              examples:
-                example-1:
-                  value:
-                    clients:
-                      - id: 1843
-                        name: CosmosDBMI
-                        displayName: CosmosDBMI
-                      - id: 1844
-                        name: AzureSQLregular
-                        displayName: AzureSQLregular
-                      - id: 1845
-                        name: CosmosDBreg
-                        displayName: CosmosDBreg
-                      - id: 1846
-                        name: SQLMItest
-                        displayName: SQLMItest
-                      - id: 1858
-                        name: AzureDB-Chris
-                        displayName: AzureDB-Chris
-                      - id: 1859
-                        name: Azure-DB2-ssl
-                        displayName: Azure-DB2-ssl
-                      - id: 1861
-                        name: Azure-DB3-manualdeployed
-                        displayName: Azure-DB3-manualdeployed
-                      - id: 1863
-                        name: AzureSQL-SQLRMApp
-                        displayName: AzureSQL-SQLRMApp
-                      - id: 1864
-                        name: AzmangInstregular
-                        displayName: AzmangInstregular
-                      - id: 1865
-                        name: venkat-sqlserver
-                        displayName: venkat-sqlserver
-                      - id: 1867
-                        name: TestCloudAccountformysql
-                        displayName: TestCloudAccountformysql
-                      - id: 1868
-                        name: TestCloudAccountformysql-2
-                        displayName: TestCloudAccountformysql-2
-                      - id: 1871
-                        name: Azure-DB3-ametallic3
-                        displayName: Azure-DB3-ametallic3
-                      - id: 1877
-                        name: TestCloudAccountformysql-3
-                        displayName: TestCloudAccountformysql-3
-                      - id: 1879
-                        name: AzureDB-Chris-EastUS
-                        displayName: AzureDB-Chris-EastUS
-                      - id: 1880
-                        name: CosmosUSCenteralMI
-                        displayName: CosmosUSCenteralMI
-                      - id: 1881
-                        name: EastUSManid
-                        displayName: EastUSManid
-                      - id: 1895
-                        name: test-CA
-                        displayName: test-CA
-                      - id: 1900
-                        name: SQLVMEastUSMId
-                        displayName: SQLVMEastUSMId
-                      - id: 1908
-                        name: azure5-userMI
-                        displayName: azure5-userMI
-                      - id: 1913
-                        name: AzureSQL_MI-Chris
-                        displayName: AzureSQL_MI-Chris
-                      - id: 1915
-                        name: ManInstApp
-                        displayName: ManInstApp
-                      - id: 1917
-                        name: westusManId
-                        displayName: westusManId
-                      - id: 1918
-                        name: venkatMI
-                        displayName: venkatMI
-                      - id: 1919
-                        name: vmtesuswest_ManIden
-                        displayName: vmtesuswest_ManIden
-                      - id: 1920
-                        name: CentralUSSysMaid
-                        displayName: CentralUSSysMaid
-                      - id: 1921
-                        name: New_Cosmos_UserIden
-                        displayName: New_Cosmos_UserIden
-                      - id: 1922
-                        name: uswestsystemident
-                        displayName: uswestsystemident
-                      - id: 1933
-                        name: 78sysidenvmwest_2
-                        displayName: 78sysidenvmwest_2
-                      - id: 1936
-                        name: NewEsaUsmanid
-                        displayName: NewEsaUsmanid
-                      - id: 1937
-                        name: AzureSQL-Chris-SSMS
-                        displayName: AzureSQL-Chris-SSMS
-                      - id: 1939
-                        name: Azure-workloadtest
-                        displayName: Azure-workloadtest
-                      - id: 1940
-                        name: SQLVMEast_UserManId
-                        displayName: SQLVMEast_UserManId
-                      - id: 1941
-                        name: eastus2sysmanid1
-                        displayName: eastus2sysmanid1
-                      - id: 1942
-                        name: sqlvmeastususerManId1
-                        displayName: sqlvmeastususerManId1
-                      - id: 1943
-                        name: SSMSUserMaId2
-                        displayName: SSMSUserMaId2
-                      - id: 1950
-                        name: SQLVMSSMS_UserMaId
-                        displayName: SQLVMSSMS_UserMaId
-                      - id: 1953
-                        name: Azure-WorkloadTest1
-                        displayName: Azure-WorkloadTest1
-                      - id: 1956
-                        name: Azure5-CA5
-                        displayName: Azure5-CA5
-                      - id: 1964
-                        name: azure5-CA6
-                        displayName: azure5-CA6
-                      - id: 1966
-                        name: accessnode-test
-                        displayName: accessnode-test
-                      - id: 1973
-                        name: azure5-MI
-                        displayName: azure5-MI
-                      - id: 1984
-                        name: cindia-CA
-                        displayName: cindia-CA
-                      - id: 1996
-                        name: testcloudaccount
-                        displayName: testcloudaccount
-                      - id: 1997
-                        name: testaccount2_
-                        displayName: testaccount2_
-                      - id: 1998
-                        name: testaccount2__
-                        displayName: testaccount2__
-                      - id: 1999
-                        name: testaccount3__
-                        displayName: testaccount3__
-                      - id: 2001
-                        name: testclientName
-                        displayName: testclientName
-                      - id: 2002
-                        name: testclientName1
-                        displayName: testclientName1
-                      - id: 2003
-                        name: Chris-Azure-RoleTest-MI
-                        displayName: Chris-Azure-RoleTest-MI
-                      - id: 2007
-                        name: new_cloudaccounttest
-                        displayName: new_cloudaccounttest
-                      - id: 2015
-                        name: new_cloudaccount_test6
-                        displayName: new_cloudaccount_test6
-                      - id: 2034
-                        name: new_cloudaccount_test7
-                        displayName: new_cloudaccount_test7
-                      - id: 2036
-                        name: new_cloudaccount_test8
-                        displayName: new_cloudaccount_test8
-                      - id: 2038
-                        name: atest_msslq
-                        displayName: atest_msslq
-      operationId: get-V4-Metallic-Databases-CloudAccount
-      description: ''
-      parameters: []
-    parameters: []
   /V4/AzureDB/CloudAccount:
     post:
       summary: Create New Cloud Account
@@ -1655,10 +696,91 @@ paths:
               schema:
                 $ref: '#/components/schemas/IdName'
               examples:
-                example-1:
+                Create cloud Account with backup gateway:
                   value:
                     id: 2015
                     name: new_cloudaccount_test6
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Missing name in payload:
+                  value:
+                    failedStage: PostClient
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: 'Invalid Parameter : XML error: please refer to logs for more details.'
+                      errorCode: '-1'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failedStage:
+                    type: string
+                  errorCode:
+                    type: integer
+                  errorMessage:
+                    type: object
+                    properties:
+                      errorMessage:
+                        type: string
+                      errorCode:
+                        type: string
+                x-examples:
+                  example-1:
+                    failedStage: PostClient
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Validate VS credentials failed. Provided credentials are invalid.
+                      errorCode: '100'
+              examples:
+                Invalid subscriptionID:
+                  value:
+                    failedStage: PostClient
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Validate VS credentials failed. Provided credentials are invalid.
+                      errorCode: '100'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failedStage:
+                    type: string
+                  errorCode:
+                    type: integer
+                  errorMessage:
+                    type: object
+                    properties:
+                      errorMessage:
+                        type: string
+                      errorCode:
+                        type: string
+                x-examples:
+                  example-1:
+                    failedStage: PostClient
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Validate VS credentials failed. Provided credentials are invalid.
+                      errorCode: '100'
+              examples:
+                Cloud Account name already exists:
+                  value:
+                    failedStage: PostClient
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Validate VS credentials failed. Provided credentials are invalid.
+                      errorCode: '100'
       description: Create a new user.
       requestBody:
         content:
@@ -1666,17 +788,240 @@ paths:
             schema:
               $ref: '#/components/schemas/createCloudAccount'
             examples:
-              example-1:
+              Create cloud Account with backup gateway:
                 value:
                   name: new_cloudaccount_test6
-                  subscriptionId: xxx
+                  subscriptionId: 2c21f3cf-d49e-43c1-a19b-16b9886f4b25
                   region:
                     id: 9
                   backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
+              Invalid subscription ID:
+                value:
+                  name: new_cloudaccount_cosmos
+                  subscriptionId: invalid subscriptionId
+                  region:
+                    id: 9
+                  backupGateways:
+                    - id: 1935
+                      name: SQLEastUS-SSMS-xxxxx
+              Cloud Account name already exists:
+                value:
+                  failedStage: PostClient
+                  errorCode: -1
+                  errorMessage:
+                    errorMessage: 'Duplicate entry.Client [new_cloudaccount_cosmos] already exists. Try with different Client name.'
+                    errorCode: '3'
+              Missing name in payload:
+                value:
+                  subscriptionId: e8971f69-c739-4a2e-82eb-a51b6d8c7545
+                  region:
+                    id: 9
+                  backupGateways:
+                    - id: 1935
+                      name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
         description: ''
     parameters: []
+    get:
+      summary: ''
+      operationId: get-V4-AzureDB-CloudAccount
+      tags:
+        - Cosmos
+        - Maria
+        - MySQL
+        - PostgreSQL
+        - MSSQL
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCloudAppsList'
+              examples:
+                example-1:
+                  value:
+                    cloudAccounts:
+                      - id: 1843
+                        name: CosmosDBMI
+                        displayName: CosmosDBMI
+                      - id: 1844
+                        name: AzureSQLregular
+                        displayName: AzureSQLregular
+                      - id: 1845
+                        name: CosmosDBreg
+                        displayName: CosmosDBreg
+                      - id: 1846
+                        name: SQLMItest
+                        displayName: SQLMItest
+                      - id: 1858
+                        name: AzureDB-Chris
+                        displayName: AzureDB-Chris
+                      - id: 1859
+                        name: Azure-DB2-ssl
+                        displayName: Azure-DB2-ssl
+                      - id: 1861
+                        name: Azure-DB3-manualdeployed
+                        displayName: Azure-DB3-manualdeployed
+                      - id: 1863
+                        name: AzureSQL-SQLRMApp
+                        displayName: AzureSQL-SQLRMApp
+                      - id: 1864
+                        name: AzmangInstregular
+                        displayName: AzmangInstregular
+                      - id: 1865
+                        name: venkat-sqlserver
+                        displayName: venkat-sqlserver
+                      - id: 1867
+                        name: TestCloudAccountformysql
+                        displayName: TestCloudAccountformysql
+                      - id: 1868
+                        name: TestCloudAccountformysql-2
+                        displayName: TestCloudAccountformysql-2
+                      - id: 1871
+                        name: Azure-DB3-ametallic3
+                        displayName: Azure-DB3-ametallic3
+                      - id: 1877
+                        name: TestCloudAccountformysql-3
+                        displayName: TestCloudAccountformysql-3
+                      - id: 1879
+                        name: AzureDB-Chris-EastUS
+                        displayName: AzureDB-Chris-EastUS
+                      - id: 1880
+                        name: CosmosUSCenteralMI
+                        displayName: CosmosUSCenteralMI
+                      - id: 1881
+                        name: EastUSManid
+                        displayName: EastUSManid
+                      - id: 1895
+                        name: test-CA
+                        displayName: test-CA
+                      - id: 1900
+                        name: SQLVMEastUSMId
+                        displayName: SQLVMEastUSMId
+                      - id: 1908
+                        name: azure5-userMI
+                        displayName: azure5-userMI
+                      - id: 1913
+                        name: AzureSQL_MI-Chris
+                        displayName: AzureSQL_MI-Chris
+                      - id: 1915
+                        name: ManInstApp
+                        displayName: ManInstApp
+                      - id: 1917
+                        name: westusManId
+                        displayName: westusManId
+                      - id: 1918
+                        name: venkatMI
+                        displayName: venkatMI
+                      - id: 1919
+                        name: vmtesuswest_ManIden
+                        displayName: vmtesuswest_ManIden
+                      - id: 1920
+                        name: CentralUSSysMaid
+                        displayName: CentralUSSysMaid
+                      - id: 1921
+                        name: New_Cosmos_UserIden
+                        displayName: New_Cosmos_UserIden
+                      - id: 1922
+                        name: uswestsystemident
+                        displayName: uswestsystemident
+                      - id: 1933
+                        name: 78sysidenvmwest_2
+                        displayName: 78sysidenvmwest_2
+                      - id: 1936
+                        name: NewEsaUsmanid
+                        displayName: NewEsaUsmanid
+                      - id: 1937
+                        name: AzureSQL-Chris-SSMS
+                        displayName: AzureSQL-Chris-SSMS
+                      - id: 1939
+                        name: Azure-workloadtest
+                        displayName: Azure-workloadtest
+                      - id: 1940
+                        name: SQLVMEast_UserManId
+                        displayName: SQLVMEast_UserManId
+                      - id: 1941
+                        name: eastus2sysmanid1
+                        displayName: eastus2sysmanid1
+                      - id: 1942
+                        name: sqlvmeastususerManId1
+                        displayName: sqlvmeastususerManId1
+                      - id: 1943
+                        name: SSMSUserMaId2
+                        displayName: SSMSUserMaId2
+                      - id: 1950
+                        name: SQLVMSSMS_UserMaId
+                        displayName: SQLVMSSMS_UserMaId
+                      - id: 1953
+                        name: Azure-WorkloadTest1
+                        displayName: Azure-WorkloadTest1
+                      - id: 1956
+                        name: Azure5-CA5
+                        displayName: Azure5-CA5
+                      - id: 1964
+                        name: azure5-CA6
+                        displayName: azure5-CA6
+                      - id: 1966
+                        name: accessnode-test
+                        displayName: accessnode-test
+                      - id: 1973
+                        name: azure5-MI
+                        displayName: azure5-MI
+                      - id: 1984
+                        name: cindia-CA
+                        displayName: cindia-CA
+                      - id: 1996
+                        name: testcloudaccount
+                        displayName: testcloudaccount
+                      - id: 1997
+                        name: testaccount2_
+                        displayName: testaccount2_
+                      - id: 1998
+                        name: testaccount2__
+                        displayName: testaccount2__
+                      - id: 1999
+                        name: testaccount3__
+                        displayName: testaccount3__
+                      - id: 2001
+                        name: testclientName
+                        displayName: testclientName
+                      - id: 2002
+                        name: testclientName1
+                        displayName: testclientName1
+                      - id: 2003
+                        name: Chris-Azure-RoleTest-MI
+                        displayName: Chris-Azure-RoleTest-MI
+                      - id: 2007
+                        name: new_cloudaccounttest
+                        displayName: new_cloudaccounttest
+                      - id: 2015
+                        name: new_cloudaccount_test6
+                        displayName: new_cloudaccount_test6
+                      - id: 2034
+                        name: new_cloudaccount_test7
+                        displayName: new_cloudaccount_test7
+                      - id: 2036
+                        name: new_cloudaccount_test8
+                        displayName: new_cloudaccount_test8
+                      - id: 2038
+                        name: atest_msslq
+                        displayName: atest_msslq
+      description: 'GET API to list all the cloudAccounts '
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - COSMOS
+              - MYSQL
+              - POSTGRESQL
+              - MARIA
+              - MSSQL
+          in: query
+          name: dbType
+          required: true
+          description: Azure Cloud DB Types
   /V4/AzureDB/Maria/Instance:
     get:
       summary: Get Maria DB instances
@@ -1782,7 +1127,52 @@ paths:
                     instance:
                       id: 1724
                       name: 'mariadb/mariadb103[eastus]'
-      description: ''
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                If the instance name already exists:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: An instance by this name already exists.
+                      errorCode: '3'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2015'
+                        instanceName: 'mariadb/mariadb103[eastus]'
+                        instanceId: '-1'
+                        _type_: ROOT_ENTITY
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                If dbInstanceIdentifier is not specified:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Failed to create new instance.
+                      errorCode: '1'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2015'
+                        instanceName: ''
+                        instanceId: '-1'
+                        _type_: ROOT_ENTITY
+      description: |-
+        This endpoint will create a new instance provided
+
+        Please get the dbInstanceIdentifier and port from the GET V4/AzureDB/Maria/Instance API
       requestBody:
         content:
           application/json:
@@ -1800,6 +1190,23 @@ paths:
                   database:
                     username: xxxx
                     password: xxxx
+                  endPoint: mariadb103.xxx.xxx.xxx.com
+                  port: 3306
+                  backupGateways:
+                    - id: 1898
+                      name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
+                  plan:
+                    id: 1638
+              Payload without dbInstanceIdentifier:
+                value:
+                  region:
+                    id: 9
+                  cloudAccount:
+                    id: 2015
+                    name: new_cloudaccount_test6
+                  database:
+                    username: mariatest@mariadb103
+                    password: U2FtX2ticEByYXZ1cnU=
                   endPoint: mariadb103.mariadb.database.azure.com
                   port: 3306
                   backupGateways:
@@ -1807,6 +1214,7 @@ paths:
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   plan:
                     id: 1638
+        description: 'In this payload we need region, cloudAccount, database credentialsm endPoint, port, backupGateways and plan. All these inputs are required and case sensitive. API will fail if the inputs are not sufficient'
   /V4/AzureDB/MySQL/Instance:
     get:
       summary: Get MySQL Instances
@@ -1843,7 +1251,7 @@ paths:
                         instanceCreateTime: 2927956568
                         dBInstanceClass: ''
                         dbSecurityGroup: ''
-                        endPoint: "***.**.**.**.com"
+                        endPoint: mysqltestserver.mysql.database.azure.com
                         port: 3306
                         licenseModel: ''
                         preferredMaintenanceWindow: ''
@@ -1909,6 +1317,61 @@ paths:
                     instance:
                       name: 'mysqltestserver[eastus]'
                       id: 1730
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Instance aready exists:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: An instance by this name already exists.
+                      errorCode: '3'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2034'
+                        instanceName: 'mysqltestserver[eastus]'
+                        instanceId: '-1'
+                        _type_: ROOT_ENTITY
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                backupGateway is offline:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: 'Unable to connect to client [azmetallic5-MI] to execute [MySqlBrowseAgent].\\nPlease ensure that all iDataAgent software is properly installed.\\nAlso check network connectivity and if this product''s services are running.'
+                      errorCode: '4444'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2034'
+                        instanceName: 'mysqltestserver[eastus]'
+                        instanceId: '1961'
+                        _type_: ROOT_ENTITY
+                database information not specified:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Failed to create new instance.
+                      errorCode: '1'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2034'
+                        instanceName: ''
+                        instanceId: '-1'
+                        _type_: ROOT_ENTITY
       requestBody:
         content:
           application/json:
@@ -1933,6 +1396,20 @@ paths:
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   plan:
                     id: 1638
+              database information not specified:
+                value:
+                  region:
+                    id: 9
+                  cloudAccount:
+                    id: 2034
+                    name: new_cloudaccount_test7
+                  port: 3306
+                  backupGateways:
+                    - id: 1898
+                      name: azmetallic5-MI-xxx
+                  plan:
+                    id: 1638
+                    name: MAS-DB-custom-2d
           application/xml:
             schema:
               type: object
@@ -1974,7 +1451,7 @@ paths:
                         instanceCreateTime: 2927961440
                         dBInstanceClass: ''
                         dbSecurityGroup: ''
-                        endPoint: xxx
+                        endPoint: pg11servereastus.postgres.database.azure.com
                         port: 5432
                         licenseModel: ''
                         preferredMaintenanceWindow: ''
@@ -2002,7 +1479,7 @@ paths:
                         instanceCreateTime: 2927961440
                         dBInstanceClass: ''
                         dbSecurityGroup: ''
-                        endPoint: xxx
+                        endPoint: jah-pgdb.postgres.database.azure.com
                         port: 5432
                         licenseModel: ''
                         preferredMaintenanceWindow: ''
@@ -2041,6 +1518,40 @@ paths:
                     instance:
                       name: 'pg11servereastus[eastus]'
                       id: 1734
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Server already exists:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: 'Provided Port Number [pg11servereastus.zzz.xxx.xxx.com:5432] is already in use. Please provide another port.'
+                      errorCode: '1'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2015'
+                        instanceName: 'pg11servereastus[eastus]'
+                        instanceId: '-1'
+                        _type_: ROOT_ENTITY
+                Server connection failure:
+                  value:
+                    failedStage: PostInstance
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: 'Unable to connect to client [] to execute [PostgreSQLBrowseAgent].\\nPlease ensure that all iDataAgent software is properly installed.\\nAlso check network connectivity and if this product''s services are running.'
+                      errorCode: '4444'
+                      entity:
+                        subclientId: '0'
+                        clientId: '2015'
+                        instanceName: 'pg11servereastus[eastus]'
+                        instanceId: '1962'
+                        _type_: ROOT_ENTITY
       requestBody:
         content:
           application/json:
@@ -2280,8 +1791,31 @@ paths:
                 example-2:
                   value:
                     instance:
-                      name: 'SQL API [eastus]'
                       id: 1752
+                      name: 'SQL API [eastus]'
+                example-1:
+                  value:
+                    instance:
+                      id: 1958
+                      name: 'SQL API [eastus]'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Instance already exists:
+                  value:
+                    errorMessage: An instance by this name already exists.
+                    errorCode: 3
+                    entity:
+                      subclientId: 0
+                      clientId: 2038
+                      instanceName: sqlami-eastus.0b6ca3d85c3b.database.windows.net
+                      instanceId: -1
+                      _type_: 0
       description: 'Create a Cosmos Cloud DB Instance on metallic azure '
       requestBody:
         content:
@@ -2301,131 +1835,26 @@ paths:
                   backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
-        description: ''
-  /V4/AzureDB/Cosmos/Subclient:
-    get:
-      summary: GET Cosmos Subclients
-      tags:
-        - Cosmos
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCosmosSubclient'
-              examples:
-                example-1:
-                  value:
-                    subClients:
-                      - client:
-                          id: 2034
-                          name: new_cloudaccount_test7
-                        backupset:
-                          id: 5629
-                          name: defaultBackupSet
-                        subclient:
-                          id: 7029
-                          name: default
-      operationId: get-V4-AzureDB-MSSQL-Subclient
-      parameters:
-        - schema:
-            type: integer
-          in: query
-          name: cloudAccountId
-          required: true
-        - schema:
-            type: string
-          in: query
-          name: instanceId
-          required: true
-      description: Get List of Subclients of Cosmos DB Instance
-    parameters: []
-    post:
-      summary: Update the subclient content for cosmos DB
-      operationId: post-V4-AzureDB-Cosmos-Subclient
-      tags:
-        - Cosmos
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  processinginstructioninfo:
-                    type: object
-                    properties:
-                      attributes:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            value:
-                              type: string
-                  response:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        warningCode:
-                          type: integer
-                        errorCode:
-                          type: integer
-                        warningMessage:
-                          type: string
-                x-examples:
-                  example-1:
-                    processinginstructioninfo:
-                      attributes:
-                        - name: exitval
-                          value: '0'
-                    response:
-                      - warningCode: 0
-                        errorCode: 0
-                        warningMessage: ''
-              examples:
-                example-1:
-                  value:
-                    processinginstructioninfo:
-                      attributes:
-                        - name: exitval
-                          value: '0'
-                    response:
-                      - warningCode: 0
-                        errorCode: 0
-                        warningMessage: ''
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateCosmosSubclient'
-            examples:
-              example-1:
+              Create Instance with cloudDBContent:
                 value:
                   cloudAccount:
                     id: 2034
                     name: new_cloudaccount_test7
-                  backupset:
-                    id: 5644
-                    name: defaultBackupSet
-                  instance:
-                    name: 'SQL API [eastus]'
-                    id: 1752
-                  subclient:
-                    id: 7049
-                    name: default
+                  region:
+                    id: 9
+                  plan:
+                    id: 1638
+                  backupGateways:
+                    - id: 1898
+                      name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   cloudDBContent:
                     children:
-                      - path: eastus
-                        displayName: doshinsky-cosmos-1
-                        name: doshinsky-cosmos-1
-                        type: 52
-        description: ''
-      description: Update the contents for the cosmos DB contents
+                      - path: doshinsky-cosmos-1
+                        displayName: CosTestDB
+                        name: CosTestDB
+                        type: 44
+                        value: eastus
+        description: Cloud DB Content is optional . If not provided all containers in the DB are backed up
 components:
   schemas:
     createCloudAccount:
@@ -2504,13 +1933,14 @@ components:
       type: object
       x-examples:
         example-1:
-          clients:
+          cloudAccounts:
             - Id: 1843
               name: CosmosDBMI
               displayName: CosmosDBMI
       description: Get cloud Apps List
+      title: ''
       properties:
-        clients:
+        cloudAccounts:
           type: array
           items:
             type: object
@@ -2521,7 +1951,8 @@ components:
                 type: string
               displayName:
                 type: string
-      title: ''
+      required:
+        - cloudAccounts
     getStoragePoolListresp:
       type: object
       x-examples: {}
@@ -2690,19 +2121,9 @@ components:
       description: Get list of credentials
     getbackupgateways:
       type: object
-      properties:
-        clients:
-          type: array
-          items:
-            type: object
-            properties:
-              Id:
-                type: integer
-              Name:
-                type: string
       x-examples:
         example-1:
-          clients:
+          backupGateways:
             - Id: 1860
               Name: azmetallic3-d2f53950-9716-48f0-91b7-88e8ab591040
             - Id: 1898
@@ -2716,6 +2137,16 @@ components:
             - Id: 1912
               Name: SQLVMEastUS-59bf9cc7-a0c1-4ae0-a7de-3357598cdf1b
       description: Get Backup gateways API Response
+      properties:
+        backupGateways:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: integer
+              Name:
+                type: string
     IdName:
       type: object
       properties:
@@ -3075,7 +2506,7 @@ components:
         example-1:
           sqlDiscoveredServer:
             - type: Azure Managed DataBase Engine
-              name: xxx
+              name: sqlami-eastus.0b6ca3d85c3b.database.windows.net
       properties:
         sqlDiscoveredServer:
           type: array
@@ -3151,66 +2582,62 @@ components:
       title: ''
       description: Cloud DB Preview Response
     updateCosmosSubclient:
-      title: updateCosmosSubclient
+      type: object
+      properties:
+        children:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+              negation:
+                type: boolean
+              displayname:
+                type: string
+              name:
+                type: string
+              allOrAnyChildren:
+                type: boolean
+              type:
+                type: integer
+      x-examples:
+        example-1:
+          children:
+            - path: string
+              negation: true
+              displayname: string
+              name: string
+              allOrAnyChildren: true
+              type: 0
+      description: Payload contains the Array of the contents of the Cosmos DB that should be explicitly backed up. We get this from cloudDBContentPreview API for COSMOS DB.
+    createCosmos:
+      title: createCosmos
       x-stoplight:
-        id: 21p186cz97bhz
+        id: qo64icuhxdimg
       type: object
       x-examples:
         example-1:
           cloudAccount:
             id: 0
             name: string
-          backupSet:
+          region:
             id: 0
             name: string
-          instance:
+          plan:
             id: 0
             name: string
-          subclient:
-            id: 0
-            name: string
+          backupGateways:
+            - id: 0
+              name: string
           cloudDBContent:
             children:
               - path: string
+                negation: true
                 displayname: string
                 name: string
+                allOrAnyChildren: true
                 type: 0
-      properties:
-        cloudAccount:
-          $ref: '#/components/schemas/IdName'
-        backupSet:
-          $ref: '#/components/schemas/IdName'
-        instance:
-          $ref: '#/components/schemas/IdName'
-        subclient:
-          $ref: '#/components/schemas/IdName'
-        cloudDBContent:
-          type: object
-          properties:
-            children:
-              type: array
-              items:
-                type: object
-                properties:
-                  path:
-                    type: string
-                  negation:
-                    type: boolean
-                  displayname:
-                    type: string
-                  name:
-                    type: string
-                  allOrAnyChildren:
-                    type: boolean
-                  type:
-                    type: integer
-      description: Payload for updating the contents of a subclient in Cosmos DB
-    createCosmos:
-      title: createCosmos
-      x-stoplight:
-        id: qo64icuhxdimg
-      type: object
-      x-examples: {}
       description: Create a cosmos DB Instance
       properties:
         cloudAccount:
@@ -3221,6 +2648,8 @@ components:
           $ref: '#/components/schemas/IdName'
         backupGateways:
           $ref: '#/components/schemas/accessNodes'
+        cloudDBContent:
+          $ref: '#/components/schemas/updateCosmosSubclient'
       required:
         - cloudAccount
         - region
