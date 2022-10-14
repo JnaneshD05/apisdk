@@ -295,6 +295,56 @@ paths:
       description: |
         Get the credentials for microsoft azure
     parameters: []
+    post:
+      summary: Create azure storage credentials
+      operationId: post-V4-AzureDB-Storage-Azure-Credentials
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    credential:
+                      id: 442
+                    errorMessage: Successful!
+                    errorCode: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    errorMessage: 'Credential account [testcrednt] already exists. Use other credentials.'
+                    errorCode: 587206339
+      description: API to create the storage credentials for Azure Storage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createStorageCredential'
+            examples:
+              example-1:
+                value:
+                  name: testcredentials
+                  accountName: sa
+                  accesskey: Q29tbXZhdWx0ITEy
+                  description: test
+              Credential already exists:
+                value:
+                  name: testcrednt
+                  accountName: sa
+                  accesskey: Q29tbXZhdWx0ITEy
+                  description: test
+        description: 'Json request body which contains name and storageAccountName, accessKey and description as the inputs'
   /V4/AzureDB/Storage:
     get:
       summary: GET Azure Storage - Cloud storage location
@@ -380,6 +430,10 @@ paths:
                   value:
                     id: 2103
                     name: CVMetallic-AzureDB1-Cloud storage teststorage7
+                When name is passed for the metallic type storage- Input name will be ignored:
+                  value:
+                    id: 1909
+                    name: cvmetallic-azuredb1-server2-eastus2
         '500':
           description: Internal Server Error
           content:
@@ -406,11 +460,6 @@ paths:
                           errorCode:
                             type: string
               examples:
-                Invalid storage class in payload:
-                  value:
-                    failedStage: PostStoragePool1
-                    errorCode: -1
-                    errorMessage: 'null'
                 Storage pool already exists:
                   value:
                     failedStage: PostStoragePool1
@@ -423,6 +472,13 @@ paths:
                     failedStage: string
                     errorCode: 0
                     errorMessage: 'null'
+                When backup gateway is unreachable:
+                  value:
+                    failedStage: PostStoragePool
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: 'Failed to verify the device from MediaAgent [azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941] with the error [Communication with MediaAgent[azmetallic5-MI] failed. Please check that this product''s services on MediaAgent are up[azmetallic5-MI].].'
+                      errorCode: '1'
       description: Create storage pool
       requestBody:
         content:
@@ -458,12 +514,6 @@ paths:
                   backupGateways:
                     - id: 1898
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
-              Invalid storage class in payload:
-                value:
-                  type: Metallic
-                  region:
-                    id: 9
-                  storageClass: ''
               Storage Pool Already exist:
                 value:
                   type: Azure
@@ -473,15 +523,26 @@ paths:
                   credential:
                     id: 350
                   container: somecontanier
-              Invalid type in payload:
+              'When name is passed for the metallic type storage ':
                 value:
-                  type: azre
-                  name: CVMetallic-AzureDB1-Cloud storage
+                  type: Metallic
+                  storageClass: MRR_COOL
+                  name: CVMetallic test metallic MRR storage
+                  region:
+                    Id: 8
+              When backupgateway is unreachable:
+                value:
+                  type: Azure
+                  name: Azure test storage
                   region:
                     id: 9
                   credential:
                     id: 350
-                  container: somecontanier
+                  backupGateways:
+                    - id: 1898
+                      name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
+                  container: test container
+        description: ''
   /V4/AzureDB/Plans:
     get:
       summary: Get eligible Plans
@@ -678,6 +739,87 @@ paths:
       operationId: get-V4-Metallic-Azure-SavedCredentials
       description: Get saved credentials for cloud account
     parameters: []
+    post:
+      summary: Create Cloud Account credentials
+      operationId: post-V4-AzureDB-CloudAccount-Credentials
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    credential:
+                      id: 443
+                    errorMessage: Successful!
+                    errorCode: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Credential account name already exists:
+                  value:
+                    errorMessage: 'Credential account [testcloudaccountcred] already exists. Use other credentials.'
+                    errorCode: 587206339
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCloudAccountCreds'
+            examples:
+              example-1:
+                value:
+                  name: test
+                  tenantId: testid
+                  applicationId: testappid
+                  applicationSecret: Q29tbXZhdWx0ITEy
+                  description: test creds with no meaning
+              Credential account name already exists:
+                value:
+                  name: testcloudaccountcred
+                  tenantId: id
+                  applicationId: id
+                  applicationSecret: Q29tbXZhdWx0ITEy
+                  description: test creds with no meaning
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/createCloudAccountCreds'
+            examples:
+              example-1:
+                value:
+                  name: string
+                  tenantId: string
+                  applicationId: string
+                  applicationSecret: string
+                  description: string
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+          text/html:
+            schema:
+              type: object
+              properties: {}
+          text/plain:
+            schema:
+              type: object
+              properties: {}
+          application/EDI-X12:
+            schema:
+              type: object
+              properties: {}
+          application/EDIFACT:
+            schema:
+              type: object
+              properties: {}
   /V4/AzureDB/CloudAccount:
     post:
       summary: Create New Cloud Account
@@ -700,21 +842,6 @@ paths:
                   value:
                     id: 2015
                     name: new_cloudaccount_test6
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Missing name in payload:
-                  value:
-                    failedStage: PostClient
-                    errorCode: -1
-                    errorMessage:
-                      errorMessage: 'Invalid Parameter : XML error: please refer to logs for more details.'
-                      errorCode: '-1'
         '403':
           description: Forbidden
           content:
@@ -779,8 +906,23 @@ paths:
                     failedStage: PostClient
                     errorCode: -1
                     errorMessage:
-                      errorMessage: Validate VS credentials failed. Provided credentials are invalid.
-                      errorCode: '100'
+                      errorMessage: 'Duplicate entry.Client [new_cloudaccount_cosmos] already exists. Try with different Client name.'
+                      errorCode: '3'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Invalid backup gateway in the input:
+                  value:
+                    failedStage: PostClient
+                    errorCode: -1
+                    errorMessage:
+                      errorMessage: Validate VS credentials failed. Unexpected response is received.
+                      errorCode: '105'
       description: Create a new user.
       requestBody:
         content:
@@ -808,19 +950,22 @@ paths:
                       name: SQLEastUS-SSMS-xxxxx
               Cloud Account name already exists:
                 value:
-                  failedStage: PostClient
-                  errorCode: -1
-                  errorMessage:
-                    errorMessage: 'Duplicate entry.Client [new_cloudaccount_cosmos] already exists. Try with different Client name.'
-                    errorCode: '3'
-              Missing name in payload:
-                value:
-                  subscriptionId: e8971f69-c739-4a2e-82eb-a51b6d8c7545
+                  name: new_cloudaccount_test6
+                  subscriptionId: 2c21f3cf-d49e-43c1-a19b-16b9886f4b25
                   region:
                     id: 9
                   backupGateways:
-                    - id: 1935
-                      name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
+                    - id: 1898
+                      name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
+              Invalid backupgateway name specified:
+                value:
+                  name: entity_testaccount
+                  subscriptionId: 2c21f3cf-d49e-43c1-a19b-16b9886f4b25
+                  region:
+                    id: 9
+                  backupGateways:
+                    - id: 1898
+                      name: azmetallic5...
         description: ''
     parameters: []
     get:
@@ -1148,27 +1293,6 @@ paths:
                         instanceName: 'mariadb/mariadb103[eastus]'
                         instanceId: '-1'
                         _type_: ROOT_ENTITY
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                If dbInstanceIdentifier is not specified:
-                  value:
-                    failedStage: PostInstance
-                    errorCode: -1
-                    errorMessage:
-                      errorMessage: Failed to create new instance.
-                      errorCode: '1'
-                      entity:
-                        subclientId: '0'
-                        clientId: '2015'
-                        instanceName: ''
-                        instanceId: '-1'
-                        _type_: ROOT_ENTITY
       description: |-
         This endpoint will create a new instance provided
 
@@ -1191,23 +1315,6 @@ paths:
                     username: xxxx
                     password: xxxx
                   endPoint: mariadb103.xxx.xxx.xxx.com
-                  port: 3306
-                  backupGateways:
-                    - id: 1898
-                      name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
-                  plan:
-                    id: 1638
-              Payload without dbInstanceIdentifier:
-                value:
-                  region:
-                    id: 9
-                  cloudAccount:
-                    id: 2015
-                    name: new_cloudaccount_test6
-                  database:
-                    username: mariatest@mariadb103
-                    password: U2FtX2ticEByYXZ1cnU=
-                  endPoint: mariadb103.mariadb.database.azure.com
                   port: 3306
                   backupGateways:
                     - id: 1898
@@ -1359,19 +1466,6 @@ paths:
                         instanceName: 'mysqltestserver[eastus]'
                         instanceId: '1961'
                         _type_: ROOT_ENTITY
-                database information not specified:
-                  value:
-                    failedStage: PostInstance
-                    errorCode: -1
-                    errorMessage:
-                      errorMessage: Failed to create new instance.
-                      errorCode: '1'
-                      entity:
-                        subclientId: '0'
-                        clientId: '2034'
-                        instanceName: ''
-                        instanceId: '-1'
-                        _type_: ROOT_ENTITY
       requestBody:
         content:
           application/json:
@@ -1396,20 +1490,6 @@ paths:
                       name: azmetallic5-MI-790422ef-cd2c-44a9-aaf6-c8a7b93ab941
                   plan:
                     id: 1638
-              database information not specified:
-                value:
-                  region:
-                    id: 9
-                  cloudAccount:
-                    id: 2034
-                    name: new_cloudaccount_test7
-                  port: 3306
-                  backupGateways:
-                    - id: 1898
-                      name: azmetallic5-MI-xxx
-                  plan:
-                    id: 1638
-                    name: MAS-DB-custom-2d
           application/xml:
             schema:
               type: object
@@ -1637,6 +1717,55 @@ paths:
                         accountType: SQL_SERVER_ACCOUNT
       operationId: get-V4-AzureDB-MSSQL-Credentials
       description: 'Get the list of credentials for MSSQL Cloud DB : Azure'
+    post:
+      summary: ''
+      operationId: post-V4-AzureDB-MSSQL-Credentials
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    credential:
+                      id: 441
+                    errorMessage: Successful!
+                    errorCode: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Credential account already exists:
+                  value:
+                    errorMessage: 'Credential account [testcrednt] already exists. Use other credentials.'
+                    errorCode: 587206339
+      description: Create Azure DB  MSSQL Credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createMSSQLCreds'
+            examples:
+              example-1:
+                value:
+                  name: testmssqlcreda
+                  userAccount: userAccount
+                  password: Q29tbXZhdWx0ITEy
+                  description: description test
+              Credential already exists:
+                value:
+                  name: testmssqlcreda
+                  userAccount: userAccount
+                  password: Q29tbXZhdWx0ITEy
+                  description: description test
   /V4/Azure/MSSQL/Instance:
     get:
       summary: MSSQL Instance
@@ -1855,6 +1984,341 @@ paths:
                         type: 44
                         value: eastus
         description: Cloud DB Content is optional . If not provided all containers in the DB are backed up
+  /V4/Virtualization/plan/eligible:
+    get:
+      summary: Get eligible plans for hypervisor
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPlansResp'
+              examples:
+                example-1:
+                  value:
+                    plans:
+                      - id: 1872
+                        name: AZDB1eastus-AZDB1eastus2
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          SecondaryStorageType: Cloud
+                          AssociatedEntitiesCount: '1'
+                      - id: 1898
+                        name: AzurePaaS-Plan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1740
+                        name: ByosMrrCool
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          SecondaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1737
+                        name: Cindia-plan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '5'
+                      - id: 1648
+                        name: cvmetallic-azuredb1-metallic-o365-storage-eastus2
+                        summary:
+                          RPOHours: '8'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: Infinite
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '1'
+                      - id: 1889
+                        name: cvmetallic-azuredb1-metallic-sf-eastus2
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: Infinite
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1675
+                        name: CVMetallic-AzureDB1-RDSPlan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '3'
+                      - id: 1622
+                        name: CVMetallic-AzureDB1-testplan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '6'
+                      - id: 1668
+                        name: DB-Plan-SecCopy
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          SecondaryStorageType: Cloud
+                          AssociatedEntitiesCount: '6'
+                      - id: 1827
+                        name: EUS2EUS2DT
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          SecondaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1929
+                        name: gk1
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '1'
+                      - id: 1928
+                        name: hh
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1638
+                        name: MAS-DB-custom-2d
+                        summary:
+                          RPOHours: '48'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '12'
+                      - id: 1624
+                        name: MAS-DB-Plan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '23'
+                      - id: 1627
+                        name: MCS-DB-Plan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '4'
+                      - id: 1739
+                        name: MrrHotMrrCool
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          SecondaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1760
+                        name: New
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1657
+                        name: new plan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '12'
+                      - id: 1716
+                        name: plan-MAS2
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '2'
+                      - id: 1850
+                        name: plan-pika
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '3'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          SecondaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1722
+                        name: plan-test
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1644
+                        name: SQLCUSPlan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '8'
+                      - id: 1916
+                        name: storage-ven
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1732
+                        name: swt1
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1874
+                        name: test
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1876
+                        name: test-dbplan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '1'
+                      - id: 1659
+                        name: test-plan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1626
+                        name: testDT
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '1'
+                      - id: 1651
+                        name: testDT0retention
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '1'
+                      - id: 1628
+                        name: testdt1
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '7'
+                      - id: 1723
+                        name: testDTPrimaryMRRHotSecBYOS
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1639
+                        name: TestM
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1640
+                        name: TestM2
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Year
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1641
+                        name: TestM3
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 3 Years
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1642
+                        name: TestM4
+                        summary:
+                          RPOHours: '336'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 40 Days
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1643
+                        name: TestM5
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1649
+                        name: testm8
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '0'
+                      - id: 1673
+                        name: westusplan
+                        summary:
+                          RPOHours: '24'
+                          NumberOfCopies: '2'
+                          PrimaryStorageRetention: 1 Month
+                          PrimaryStorageType: Cloud
+                          AssociatedEntitiesCount: '2'
+      operationId: get-V4-Virtualization-plan
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: hypervisorId
+          description: Client ID of the Hypervisor. Default value 0
+          required: true
+      description: 'List of all the plans eligible for hypervisor. '
+    parameters: []
 components:
   schemas:
     createCloudAccount:
@@ -2654,3 +3118,84 @@ components:
         - cloudAccount
         - region
         - plan
+    createStorageCredential:
+      title: createStorageCredential
+      x-stoplight:
+        id: ymi4x7zgc267j
+      type: object
+      x-examples:
+        example-1:
+          name: string
+          accountName: string
+          accesskeyId: string
+          description: string
+      properties:
+        name:
+          type: string
+        accountName:
+          type: string
+        accesskey:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - accountName
+        - accesskey
+    createCloudAccountCreds:
+      title: createCloudAccountCreds
+      x-stoplight:
+        id: azecu6ps02tu0
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cloud account unique name which is used to identify
+        tenantId:
+          type: string
+          description: azure tenant Id
+        applicationId:
+          type: string
+          description: Azure application Id
+        applicationSecret:
+          type: string
+          description: Azure applicationSecret for the applicationId
+        description:
+          type: string
+          description: Credential description
+      required:
+        - name
+        - tenantId
+        - applicationId
+        - applicationSecret
+      x-examples:
+        example-1:
+          name: string
+          tenantId: string
+          applicationId: string
+          applicationSecret: string
+          description: string
+    createMSSQLCreds:
+      title: createMSSQLCreds
+      x-stoplight:
+        id: kudwp6wqa7dne
+      type: object
+      properties:
+        name:
+          type: string
+        userAccount:
+          type: string
+        password:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - userAccount
+        - password
+      x-examples:
+        example-1:
+          name: string
+          userAccount: string
+          password: string
+          description: string
