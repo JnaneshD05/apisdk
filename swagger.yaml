@@ -335,13 +335,13 @@ paths:
               example-1:
                 value:
                   name: testcredentials
-                  accountName: sa
+                  storageAccountName: sa
                   accesskey: Q29tbXZhdWx0ITEy
                   description: test
               Credential already exists:
                 value:
                   name: testcrednt
-                  accountName: sa
+                  storageAccountName: sa
                   accesskey: Q29tbXZhdWx0ITEy
                   description: test
         description: 'Json request body which contains name and storageAccountName, accessKey and description as the inputs'
@@ -3123,16 +3123,11 @@ components:
       x-stoplight:
         id: ymi4x7zgc267j
       type: object
-      x-examples:
-        example-1:
-          name: string
-          accountName: string
-          accesskeyId: string
-          description: string
+      x-examples: {}
       properties:
         name:
           type: string
-        accountName:
+        storageAccountName:
           type: string
         accesskey:
           type: string
@@ -3140,7 +3135,7 @@ components:
           type: string
       required:
         - name
-        - accountName
+        - storageAccountName
         - accesskey
     createCloudAccountCreds:
       title: createCloudAccountCreds
