@@ -1762,7 +1762,7 @@ paths:
                   description: description test
               Credential already exists:
                 value:
-                  name: testmssqlcreda
+                  name: testcredent
                   userAccount: userAccount
                   password: Q29tbXZhdWx0ITEy
                   description: description test
