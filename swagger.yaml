@@ -336,13 +336,13 @@ paths:
                 value:
                   name: testcredentials
                   storageAccountName: sa
-                  accesskey: Q29tbXZhdWx0ITEy
+                  accessKey: Q29tbXZhdWx0ITEy
                   description: test
               Credential already exists:
                 value:
                   name: testcrednt
                   storageAccountName: sa
-                  accesskey: Q29tbXZhdWx0ITEy
+                  accessKey: Q29tbXZhdWx0ITEy
                   description: test
         description: 'Json request body which contains name and storageAccountName, accessKey and description as the inputs'
   /V4/AzureDB/Storage:
@@ -3129,14 +3129,14 @@ components:
           type: string
         storageAccountName:
           type: string
-        accesskey:
+        accessKey:
           type: string
         description:
           type: string
       required:
         - name
         - storageAccountName
-        - accesskey
+        - accessKey
     createCloudAccountCreds:
       title: createCloudAccountCreds
       x-stoplight:
