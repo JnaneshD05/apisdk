@@ -1887,6 +1887,29 @@ paths:
                           value: eastus
                     errorResp:
                       errorCode: 0
+                Response when browsepath is not passed:
+                  value:
+                    cloudDBEntity:
+                      type: 17
+                      children:
+                        - path: eastus
+                          displayName: doshinsky-cosmos-1
+                          name: doshinsky-cosmos-1
+                          type: 52
+                    errorResp:
+                      errorCode: 0
+                BrowsePath for previewing the contents of individual DBs:
+                  value:
+                    cloudDBEntity:
+                      type: 17
+                      children:
+                        - path: doshinsky-cosmos-1/CosTestDB
+                          displayName: Volcanodata
+                          name: Volcanodata
+                          type: 45
+                          value: eastus
+                    errorResp:
+                      errorCode: 0
       requestBody:
         content:
           application/json:
@@ -1901,6 +1924,21 @@ paths:
                     id: 2015
                     name: new_cloudaccount_test6
                   browsePath: doshinsky-cosmos-1
+              When browsePath is not passed:
+                value:
+                  region:
+                    id: 9
+                  cloudAccount:
+                    id: 16053
+                    name: 1zureKDB
+              BrowsePath for previewing the contents of CosTestDB:
+                value:
+                  region:
+                    id: 9
+                  cloudAccount:
+                    id: 16053
+                    name: 1zureKDB
+                  browsePath: doshinsky-cosmos-1/CosTestDB
         description: ''
       description: Preview the Cloud DB contents for Cosmos Instance
   /V4/AzureDB/Cosmos/Instance:
@@ -1917,15 +1955,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/postInstanceResp'
               examples:
-                example-2:
+                example-1:
                   value:
                     instance:
                       id: 1752
                       name: 'SQL API [eastus]'
-                example-1:
+                Create Instance with cloudDBContent:
                   value:
                     instance:
                       id: 1958
+                      name: 'SQL API [eastus]'
+                Create instance with content of a single DB:
+                  value:
+                    instance:
+                      id: 8787
                       name: 'SQL API [eastus]'
         '500':
           description: Internal Server Error
@@ -1982,6 +2025,27 @@ paths:
                         displayName: CosTestDB
                         name: CosTestDB
                         type: 44
+                        value: eastus
+              Create instance with content JustAFew container in SampleDB:
+                value:
+                  cloudAccount:
+                    id: 16053
+                    name: 1zureKDB
+                  region:
+                    id: 9
+                    name: eastus
+                  plan:
+                    id: 8858
+                    name: bn
+                  backupGateways:
+                    - id: 11157
+                      name: ashm039test-5299500d-73d1-40b0-90f8-4115afead6a5
+                  cloudDBContent:
+                    children:
+                      - path: doshinsky-cosmos-1/SampleDB
+                        displayName: JustAFew
+                        name: JustAFew
+                        type: 45
                         value: eastus
         description: Cloud DB Content is optional . If not provided all containers in the DB are backed up
   /V4/Virtualization/plan/eligible:
@@ -2319,6 +2383,210 @@ paths:
           required: true
       description: 'List of all the plans eligible for hypervisor. '
     parameters: []
+  /V4/Database/Instance:
+    get:
+      summary: List Database instances with pagination
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instances:
+                    $ref: '#/components/schemas/getDatabaselist'
+              examples:
+                example-1:
+                  value:
+                    instances:
+                      - id: 16
+                        name: SANJAYCSL\COMMVAULT
+                        server: sanjaycsl
+                        client:
+                          id: 2
+                          name: sanjaycsl
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: READY
+                        lastBackup:
+                          jobId: 9412
+                          time: 1664189866
+                        applicationSize: 24117248
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                      - id: 39
+                        name: SANJAYCSL\ANALYSIS1(Analysis Services)
+                        server: sanjaycsl
+                        client:
+                          id: 2
+                          name: sanjaycsl
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: NOT_READY
+                        notReadyReason: 'Instance validation failed : SQL server [SANJAYCSL\ANALYSIS1(Analysis Services)] service is not valid. please check if SQL server is running.'
+                        lastBackup:
+                          jobId: 0
+                          status: NEVER_BACKED_UP
+                        applicationSize: 0
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                      - id: 40
+                        name: ALCHEMIST3
+                        server: alchemist3
+                        client:
+                          id: 34
+                          name: alchemist3
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: READY
+                        lastBackup:
+                          jobId: 0
+                          status: NEVER_BACKED_UP
+                        applicationSize: 0
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                      - id: 41
+                        name: SEBTHOMASVM4\SEBTHOMAS
+                        server: sebthomasvm4_3
+                        client:
+                          id: 35
+                          name: sebthomasvm4_3
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: NOT_READY
+                        notReadyReason: Instance is not associated to a valid plan or storage policy
+                        lastBackup:
+                          jobId: 0
+                          status: NEVER_BACKED_UP
+                        applicationSize: 0
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                      - id: 42
+                        name: SEBTHOMASVM5\SEBTHOMAS_2
+                        server: sebthomasvm5_3
+                        client:
+                          id: 36
+                          name: sebthomasvm5_3
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: NOT_READY
+                        notReadyReason: Instance is not associated to a valid plan or storage policy
+                        lastBackup:
+                          jobId: 0
+                          status: NEVER_BACKED_UP
+                        applicationSize: 0
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                      - id: 50
+                        name: TestAG
+                        server: SEBTHOMASVM4_SEBTHOMAS_AGClient
+                        client:
+                          id: 44
+                          name: SEBTHOMASVM4_SEBTHOMAS_AGClient
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: NOT_READY
+                        notReadyReason: Instance is not associated to a valid plan or storage policy
+                        lastBackup:
+                          jobId: 0
+                          status: NEVER_BACKED_UP
+                        applicationSize: 0
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                When limit is 1:
+                  value:
+                    instances:
+                      - id: 16
+                        name: SANJAYCSL\COMMVAULT
+                        server: sanjaycsl
+                        client:
+                          id: 2
+                          name: sanjaycsl
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: READY
+                        lastBackup:
+                          jobId: 9412
+                          time: 1664189866
+                        applicationSize: 24117248
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+                When offset is 5 and limit is 1:
+                  value:
+                    instances:
+                      - id: 50
+                        name: TestAG
+                        server: SEBTHOMASVM4_SEBTHOMAS_AGClient
+                        client:
+                          id: 44
+                          name: SEBTHOMASVM4_SEBTHOMAS_AGClient
+                        vendor: NOT_APPLICABLE
+                        databaseEngine: SQL_SERVER
+                        status: NOT_READY
+                        notReadyReason: Instance is not associated to a valid plan or storage policy
+                        lastBackup:
+                          jobId: 0
+                          status: NEVER_BACKED_UP
+                        applicationSize: 0
+                        plan:
+                          id: 0
+                          name: Not Assigned
+                        SLAStatus: '2'
+                        company:
+                          id: 0
+                          name: ''
+      operationId: get-V4-Database-Instance
+      parameters:
+        - schema:
+            type: integer
+            format: int64
+          in: query
+          name: offset
+          description: Start value for pagination
+        - schema:
+            type: integer
+            format: int64
+            default: 20
+          in: query
+          name: limit
+          description: Total number of records in the response
 components:
   schemas:
     createCloudAccount:
@@ -2741,20 +3009,17 @@ components:
       x-stoplight:
         id: 91b5ub2w96z3l
       type: object
+      description: Payload for CloudDB Content Preview
       properties:
         region:
           $ref: '#/components/schemas/IdName'
         cloudAccount:
           $ref: '#/components/schemas/IdName'
-        instanceName:
-          type: string
-          description: 'optional input instance name '
         browsePath:
           type: string
       required:
         - region
         - cloudAccount
-      description: Payload for CloudDB Content Preview
     postInstanceResp:
       type: object
       x-examples:
@@ -3194,3 +3459,40 @@ components:
           userAccount: string
           password: string
           description: string
+    getDatabaselist:
+      title: getDatabaselist
+      x-stoplight:
+        id: zaqcj3k8a5kxv
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          server:
+            type: string
+          client:
+            $ref: '#/components/schemas/IdName'
+          vendor:
+            type: string
+          databaseEngine:
+            type: string
+          status:
+            type: string
+          lastBackup:
+            type: object
+            properties:
+              jobId:
+                type: integer
+              time:
+                type: integer
+          applicationSize:
+            type: integer
+          plan:
+            $ref: '#/components/schemas/IdName'
+          SLAStatus:
+            type: string
+          company:
+            $ref: '#/components/schemas/IdName'
