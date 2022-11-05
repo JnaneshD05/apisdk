@@ -1970,6 +1970,11 @@ paths:
                     instance:
                       id: 8787
                       name: 'SQL API [eastus]'
+                Create instance with multiple containers:
+                  value:
+                    instance:
+                      id: 8796
+                      name: 'SQL API [eastus]'
         '500':
           description: Internal Server Error
           content:
@@ -2045,6 +2050,32 @@ paths:
                       - path: doshinsky-cosmos-1/SampleDB
                         displayName: JustAFew
                         name: JustAFew
+                        type: 45
+                        value: eastus
+              Create cosmos instance with multiple containers:
+                value:
+                  cloudAccount:
+                    id: 16053
+                    name: 1zureKDB
+                  region:
+                    id: 9
+                    name: eastus
+                  plan:
+                    id: 8858
+                    name: bn
+                  backupGateways:
+                    - id: 11157
+                      name: ashm039test-5299500d-73d1-40b0-90f8-4115afead6a5
+                  cloudDBContent:
+                    children:
+                      - path: doshinsky-cosmos-1/SampleDB
+                        displayName: JustAFew
+                        name: JustAFew
+                        type: 45
+                        value: eastus
+                      - path: doshinsky-cosmos-1/SampleDB
+                        displayName: Persons
+                        name: Persons
                         type: 45
                         value: eastus
         description: Cloud DB Content is optional . If not provided all containers in the DB are backed up
