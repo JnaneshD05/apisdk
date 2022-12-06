@@ -365,34 +365,108 @@ paths:
                 example-1:
                   value:
                     cloudStorage:
+                      - id: 2169
+                        name: Cloud storage
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
+                      - id: 2228
+                        name: Cloudstorage1234
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
+                      - id: 2229
+                        name: Cloudstorage23e3
+                        storagePoolType: '1'
+                        status: Offline (Mount path is inaccessible. Check the following.\na. Is the mount path visible to the operating system on the MediaAgent machine.\nb. Is the username/password correctly entered.\nc. Does this user have read/write privileges to this mount path.)
+                        type: Azure
+                      - id: 2367
+                        name: cross region test
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
+                      - id: 2236
+                        name: CVMetallic
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
                       - id: 1899
                         name: CVMetallic-AzureDB1-Cloud storage
-                        storagePoolType: DEDUPLICATION
+                        storagePoolType: '1'
                         status: Online
+                        type: Azure
+                      - id: 2114
+                        name: CVMetallic-AzureDB1-Cloud storage teststorage_new
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
                       - id: 2103
                         name: CVMetallic-AzureDB1-Cloud storage teststorage7
-                        storagePoolType: DEDUPLICATION
+                        storagePoolType: '1'
                         status: Online
+                        type: Azure
+                      - id: 2208
+                        name: CVMetallic-AzureDB1-Cloud storage-venkat
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
                       - id: 2076
                         name: CVMetallic-AzureDB1-Clouds storage
-                        storagePoolType: DEDUPLICATION
+                        storagePoolType: '1'
                         status: Online
+                        type: Azure
                       - id: 2043
                         name: cvmetallic-azuredb1-server2-eastus
-                        storagePoolType: DEDUPLICATION
+                        storagePoolType: '1'
                         status: Online
+                        type: Metallic
+                        storageClass: MRR_COOL
                       - id: 1901
                         name: cvmetallic-azuredb1-server-eastus
-                        storagePoolType: DEDUPLICATION
+                        storagePoolType: '1'
                         status: Online
+                        type: Metallic
+                        storageClass: MRR_HOT
+                      - id: 2164
+                        name: CVMetallic-DBtest1
+                        storagePoolType: '1'
+                        status: Offline (Mount path is inaccessible. Check the following.\na. Is the mount path visible to the operating system on the MediaAgent machine.\nb. Is the username/password correctly entered.\nc. Does this user have read/write privileges to this mount path.)
+                        type: Azure
+                      - id: 2163
+                        name: CVMetallic-MAS1
+                        storagePoolType: '1'
+                        status: Offline (Mount path is inaccessible. Check the following.\na. Is the mount path visible to the operating system on the MediaAgent machine.\nb. Is the username/password correctly entered.\nc. Does this user have read/write privileges to this mount path.)
+                        type: Azure
                       - id: 2025
                         name: MAS-BYOS-2
-                        storagePoolType: DEDUPLICATION
-                        status: Online
+                        storagePoolType: '1'
+                        status: Offline (Mount path is inaccessible. Check the following.\na. Is the mount path visible to the operating system on the MediaAgent machine.\nb. Is the username/password correctly entered.\nc. Does this user have read/write privileges to this mount path.)
+                        type: Azure
                       - id: 1903
                         name: MAS-DB-Storage
-                        storagePoolType: DEDUPLICATION
+                        storagePoolType: '1'
+                        status: Offline (Mount path is inaccessible. Check the following.\na. Is the mount path visible to the operating system on the MediaAgent machine.\nb. Is the username/password correctly entered.\nc. Does this user have read/write privileges to this mount path.)
+                        type: Azure
+                      - id: 2350
+                        name: My azure storage
+                        storagePoolType: '1'
                         status: Online
+                        type: Azure
+                      - id: 2357
+                        name: My azure storage new
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
+                      - id: 2365
+                        name: My azure storage new test
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
+                      - id: 2351
+                        name: My azure storage test
+                        storagePoolType: '1'
+                        status: Online
+                        type: Azure
       operationId: get-V4-Metallic-CloudStorageLocation
       description: List of all the cloud storage locations
       parameters:
@@ -1154,19 +1228,7 @@ paths:
                         name: atest_msslq
                         displayName: atest_msslq
       description: 'GET API to list all the cloudAccounts '
-      parameters:
-        - schema:
-            type: string
-            enum:
-              - COSMOS
-              - MYSQL
-              - POSTGRESQL
-              - MARIA
-              - MSSQL
-          in: query
-          name: dbType
-          required: true
-          description: Azure Cloud DB Types
+      parameters: []
   /V4/AzureDB/Maria/Instance:
     get:
       summary: Get Maria DB instances
@@ -1766,7 +1828,7 @@ paths:
                   userAccount: userAccount
                   password: Q29tbXZhdWx0ITEy
                   description: description test
-  /V4/Azure/MSSQL/Instance:
+  /V4/AzureDB/MSSQL/Instance:
     get:
       summary: MSSQL Instance
       tags:
@@ -1825,6 +1887,8 @@ paths:
             examples:
               example-1:
                 value:
+                  region:
+                    id: 9
                   instanceName: sqlami-eastus.xxx.database.windows.net
                   connectionString: xxxxt
                   credential:
@@ -1840,6 +1904,7 @@ paths:
                       name: SQLEastUS-SSMS-2e5fcf76-ab51-415d-8b45-b4460a2ee142
         description: ''
       description: Create a MSSQL Cloud DB Instance on Metallic Azure
+    parameters: []
   /V4/AzureDB/Cosmos/CloudDBContentPreview:
     parameters: []
     post:
@@ -2734,6 +2799,8 @@ components:
                 type: string
               status:
                 type: string
+              storageClass:
+                type: string
     getCredentials:
       type: object
       x-examples:
@@ -3243,6 +3310,8 @@ components:
         connectionString:
           type: string
           description: MSSQL Connection string
+        region:
+          $ref: '#/components/schemas/IdName'
         credential:
           $ref: '#/components/schemas/IdName'
         cloudAccount:
@@ -3256,6 +3325,7 @@ components:
       required:
         - instanceName
         - connectionString
+        - region
         - credential
         - cloudAccount
         - backupGateways
@@ -3414,6 +3484,7 @@ components:
         - cloudAccount
         - region
         - plan
+        - backupGateways
     createStorageCredential:
       title: createStorageCredential
       x-stoplight:
